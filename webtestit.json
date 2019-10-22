@@ -1,0 +1,10 @@
+{
+  "defaultTestName": "newTest",
+  "pageObjectFolder": "src/test/java/uitest/pageobjects",
+  "projectName": "QA-Automation-Helioscript",
+  "rootPackage": "uitest",
+  "targetFramework": "Selenium",
+  "targetLanguage": "java",
+  "testFolder": "src/test/java/uitest/tests",
+  "version": "1.8.0"
+}
