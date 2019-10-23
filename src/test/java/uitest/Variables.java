@@ -9,15 +9,17 @@ public class Variables {
 
     // Accounts and passwords
     public static String practitioner = "practitioner@mail.com";
-    public static String pPass = "Up1234$#@!";
-    public static String invalidUser = "custom1@test.com";
+    public static String pass = "Up1234$#@!";
     public static String invalidPass = "custom1";
+    public static String invalidUser = "custom1@test.com";
     public static String admin = "admin@mail.com";
 
     // Error messages
     public static String loginEM = "info The username/password couple is invalid.";
     public static String orderSent = "ORDER SENT";
     public static String patientListBtnEM = "PATIENT LIST";
+
+    public static String succesfullAdjustment = "";
 
     // Add Patient Info
     public static String firstName = UUID.randomUUID().toString();
@@ -31,5 +33,8 @@ public class Variables {
 
     //
     public static String s = RandomStringUtils.randomAlphabetic(8);
+
+    // Lot Adjustment quantites
+    public static String lotQuantity = "12";
 
 }

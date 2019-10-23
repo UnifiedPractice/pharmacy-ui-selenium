@@ -28,13 +28,13 @@ public class LoginPage extends BasePage {
     @FindBy(css = "up-login-box .row:nth-child(2) div")
     WebElement credentialError;
 
-    public DashboardPage login(String user, String pass) {
+    public PractitionerHomePage login(String user, String pass) {
         waitElement(username);
         writeText(username, user);
         writeText(password, pass);
         click(loginButton);
 
-        return new DashboardPage(driver);
+        return new PractitionerHomePage(driver);
     }
 
     public void verifyCredentials() {

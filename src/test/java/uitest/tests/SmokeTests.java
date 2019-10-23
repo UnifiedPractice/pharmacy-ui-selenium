@@ -6,8 +6,10 @@ import org.testng.annotations.Test;
 
 import uitest.TestNgTestBase;
 import uitest.Variables;
+import uitest.pageobjects.AdminHomePage;
 import uitest.pageobjects.CommissionsPage;
-import uitest.pageobjects.DashboardPage;
+import uitest.pageobjects.PractitionerHomePage;
+import uitest.pageobjects.ProductCatalogPage;
 import uitest.pageobjects.IngredientsPage;
 import uitest.pageobjects.LoginPage;
 import uitest.pageobjects.PatientlistPage;
@@ -17,7 +19,7 @@ class SmokeTests extends TestNgTestBase {
 
     @Test
     public void placeOrder() {
-        page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.pPass);
+        page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.pass);
         page.GetInstance(PatientlistPage.class).startOrder();
         page.GetInstance(IngredientsPage.class).addIngredients();
         page.GetInstance(IngredientsPage.class).checkoutOrder();
@@ -27,9 +29,20 @@ class SmokeTests extends TestNgTestBase {
 
     @Test
     public void setCommission() throws InterruptedException {
-        page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.pPass);
-        page.GetInstance(DashboardPage.class).enter_commissionsPage();
+        page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.pass);
+        page.GetInstance(PractitionerHomePage.class).enter_commissionsPage();
         page.GetInstance(CommissionsPage.class).set_Commission();
         page.GetInstance(CommissionsPage.class).assert_Commission();
     }
+
+    @Test
+    public void adjustAdd_inventory() throws InterruptedException {
+        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
+        page.GetInstance(AdminHomePage.class).enter_ProductCatalog();
+        page.GetInstance(ProductCatalogPage.class).startAdjust();
+        page.GetInstance(ProductCatalogPage.class).selectItem();
+        page.GetInstance(ProductCatalogPage.class).quantityAddition(Variables.lotQuantity);
+        page.GetInstance(ProductCatalogPage.class).assertAddition(Variables.succesfullAdjustment);
+    }
+
 }

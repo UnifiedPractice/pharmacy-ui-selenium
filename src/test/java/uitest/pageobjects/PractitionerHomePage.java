@@ -9,9 +9,9 @@ import org.testng.Assert;
 
 import uitest.BasePage;
 
-public class DashboardPage extends BasePage {
+public class PractitionerHomePage extends BasePage {
 
-    public DashboardPage(WebDriver driver) {
+    public PractitionerHomePage(WebDriver driver) {
         super(driver);
     }
 
