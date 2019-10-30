@@ -30,14 +30,14 @@ public class IngredientsPage extends BasePage {
         click(roundUp);
     }
 
-    public ShippingPage checkoutOrder() {
+    public PlaceOrderPage checkoutOrder() {
         if (checkoutOrder.isDisplayed()) {
             click(checkoutOrder);
         } else {
             waitElement(checkoutOrder);
             click(checkoutOrder);
         }
-        return new ShippingPage(driver);
+        return new PlaceOrderPage(driver);
 
     }
 

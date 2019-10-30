@@ -8,12 +8,14 @@ import uitest.TestNgTestBase;
 import uitest.Variables;
 import uitest.pageobjects.AdminHomePage;
 import uitest.pageobjects.CommissionsPage;
+import uitest.pageobjects.DispensaryPage;
 import uitest.pageobjects.PractitionerHomePage;
 import uitest.pageobjects.ProductCatalogPage;
+import uitest.pageobjects.ShippingPage;
 import uitest.pageobjects.IngredientsPage;
 import uitest.pageobjects.LoginPage;
 import uitest.pageobjects.PatientlistPage;
-import uitest.pageobjects.ShippingPage;
+import uitest.pageobjects.PlaceOrderPage;
 
 class SmokeTests extends TestNgTestBase {
 
@@ -23,8 +25,18 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(PatientlistPage.class).startOrder();
         page.GetInstance(IngredientsPage.class).addIngredients();
         page.GetInstance(IngredientsPage.class).checkoutOrder();
-        page.GetInstance(ShippingPage.class).placeOrder();
+        page.GetInstance(PlaceOrderPage.class).placeOrder();
         page.GetInstance(PatientlistPage.class).assertOrder(Variables.orderSent);
+    }
+
+    @Test
+    public void shipOrder() throws InterruptedException {
+        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
+        page.GetInstance(AdminHomePage.class).enter_Dispensary();
+        page.GetInstance(DispensaryPage.class).startOrder();
+        page.GetInstance(ShippingPage.class).select_item();
+        page.GetInstance(ShippingPage.class).completeQuantities();
+        page.GetInstance(ShippingPage.class).shipOrder();
     }
 
     @Test

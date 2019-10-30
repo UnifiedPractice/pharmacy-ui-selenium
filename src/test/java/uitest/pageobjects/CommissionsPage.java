@@ -2,16 +2,13 @@
 
 package uitest.pageobjects;
 
-import java.util.List;
-
-import org.apache.http.impl.conn.SystemDefaultRoutePlanner;
-import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.*;
 import org.testng.Assert;
 
 import uitest.BasePage;
+import uitest.Variables;
 
 public class CommissionsPage extends BasePage {
     public CommissionsPage(WebDriver driver) {
@@ -55,6 +52,6 @@ public class CommissionsPage extends BasePage {
 
     public void assert_Commission() {
         waitElement(popUp);
-        Assert.assertEquals(readText(popUp), "⨯Successfully updated commissions.");
+        Assert.assertEquals(readText(popUp), Variables.unEscapedHTML);
     }
 }

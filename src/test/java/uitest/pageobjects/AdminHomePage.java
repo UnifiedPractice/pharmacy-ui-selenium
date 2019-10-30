@@ -2,15 +2,11 @@
 
 package uitest.pageobjects;
 
-import java.util.List;
-
-import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.*;
 
 import uitest.BasePage;
-import uitest.Variables;
 
 public class AdminHomePage extends BasePage {
     public AdminHomePage(WebDriver driver) {
@@ -42,4 +38,17 @@ public class AdminHomePage extends BasePage {
         click(productCatalog);
         return new ProductCatalogPage(driver);
     }
+
+    public DispensaryPage enter_Dispensary() {
+        waitElement(dispensary);
+        click(dispensary);
+        return new DispensaryPage(driver);
+    }
+
+    public CouponCodesPage enter_CouponCodes() {
+        waitElement(couponCodes);
+        click(couponCodes);
+        return new CouponCodesPage(driver);
+    }
+
 }

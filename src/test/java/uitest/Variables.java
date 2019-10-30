@@ -2,6 +2,7 @@ package uitest;
 
 import java.util.UUID;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.text.StringEscapeUtils;
 
 public class Variables {
     // URLs
@@ -36,5 +37,8 @@ public class Variables {
 
     // Lot Adjustment quantites
     public static String lotQuantity = "12";
+    public static String escapedString = "×&#10;Successfully updated commissions.";
+
+    public static String unEscapedHTML = StringEscapeUtils.unescapeHtml4(escapedString);
 
 }
