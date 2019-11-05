@@ -54,7 +54,27 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(ProductCatalogPage.class).startAdjust();
         page.GetInstance(ProductCatalogPage.class).selectItem();
         page.GetInstance(ProductCatalogPage.class).quantityAddition(Variables.lotQuantity);
-        page.GetInstance(ProductCatalogPage.class).assertAddition(Variables.succesfullAdjustment);
+        page.GetInstance(ProductCatalogPage.class).assertChange(Variables.succesfullAdjustment);
+    }
+
+    @Test
+    public void adjustRemove_inventory() throws InterruptedException {
+        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
+        page.GetInstance(AdminHomePage.class).enter_ProductCatalog();
+        page.GetInstance(ProductCatalogPage.class).startAdjust();
+        page.GetInstance(ProductCatalogPage.class).selectItem();
+        page.GetInstance(ProductCatalogPage.class).quantityRemoval(Variables.lotQuantity);
+        page.GetInstance(ProductCatalogPage.class).assertChange(Variables.succesfullAdjustment);
+    }
+
+    @Test
+    public void receive_inventory() throws InterruptedException {
+        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
+        page.GetInstance(AdminHomePage.class).enter_ProductCatalog();
+        page.GetInstance(ProductCatalogPage.class).startReceive();
+        page.GetInstance(ProductCatalogPage.class).selectItem();
+        page.GetInstance(ProductCatalogPage.class).quantityReceival(Variables.lotQuantity, Variables.expiryDate);
+        page.GetInstance(ProductCatalogPage.class).assertChange(Variables.succesfullAdjustment);
     }
 
 }

@@ -35,14 +35,11 @@ public class ProductCatalogPage extends BasePage {
     @FindBy(css = "[type] .dx-button-text")
     WebElement saveBtn;
 
-    @FindBy(css = "")
-    WebElement add;
-
-    @FindBy(css = "")
-    WebElement remove;
-
-    @FindBy(css = "")
+    // Receive buttons
+    @FindBy(css = "dx-button:nth-of-type(2)  .dx-button-text")
     WebElement receive;
+    @FindBy(css = ".dx-dropdowneditor.dx-datebox-calendar [aria-haspopup]")
+    WebElement expiryDate;
 
     @FindBy(css = "")
     WebElement toastMessage;
@@ -50,6 +47,11 @@ public class ProductCatalogPage extends BasePage {
     public void startAdjust() throws InterruptedException {
         Thread.sleep(2500);
         click(adjust);
+    }
+
+    public void startReceive() throws InterruptedException {
+        Thread.sleep(2500);
+        click(receive);
     }
 
     public void selectItem() throws InterruptedException {
@@ -69,8 +71,29 @@ public class ProductCatalogPage extends BasePage {
         click(saveBtn);
     }
 
-    public void assertAddition(String expectedText) {
+    public void quantityRemoval(String expectedText) {
+        waitElement(typeRemove);
+        click(typeRemove);
+        click(lotNumber);
+        waitElement(lotNumberSelection);
+        click(lotNumberSelection);
+        writeText(lotQuantity, expectedText);
+        click(saveBtn);
+    }
+
+    public void quantityReceival(String lotQ, String expiryD) {
+        waitElement(lotNumber);
+        writeText(lotQuantity, lotQ);
+        writeText(expiryDate, expiryD);
+        click(lotNumber);
+        waitElement(lotNumberSelection);
+        click(lotNumberSelection);
+        click(saveBtn);
+    }
+
+    public void assertChange(String expectedText) {
         waitElement(toastMessage);
         Assert.assertEquals(readText(toastMessage), expectedText);
     }
+
 }

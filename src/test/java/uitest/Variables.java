@@ -19,6 +19,7 @@ public class Variables {
     public static String loginEM = "info The username/password couple is invalid.";
     public static String orderSent = "ORDER SENT";
     public static String patientListBtnEM = "PATIENT LIST";
+    public static String escapedString = "×&#10;Successfully updated commissions.";
 
     public static String succesfullAdjustment = "";
 
@@ -31,14 +32,13 @@ public class Variables {
     public static String address1 = "Checkout Street 1";
     public static String city = "Colorado";
     public static String zipCode = "000000";
+    public static String expiryDate = "6/15/2010";
 
-    //
+    // Special char parser and randomizer
     public static String s = RandomStringUtils.randomAlphabetic(8);
+    public static String unEscapedHTML = StringEscapeUtils.unescapeHtml4(escapedString);
 
     // Lot Adjustment quantites
     public static String lotQuantity = "12";
-    public static String escapedString = "×&#10;Successfully updated commissions.";
-
-    public static String unEscapedHTML = StringEscapeUtils.unescapeHtml4(escapedString);
 
 }
