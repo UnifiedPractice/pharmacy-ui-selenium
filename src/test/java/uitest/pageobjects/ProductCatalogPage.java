@@ -44,17 +44,17 @@ public class ProductCatalogPage extends BasePage {
     @FindBy(css = "")
     WebElement toastMessage;
 
-    public void startAdjust() throws InterruptedException {
-        Thread.sleep(2500);
+    public void startAdjust() {
+        waitElement(adjust);
         click(adjust);
     }
 
-    public void startReceive() throws InterruptedException {
-        Thread.sleep(2500);
+    public void startReceive() {
+        waitElement(receive);
         click(receive);
     }
 
-    public void selectItem() throws InterruptedException {
+    public void selectItem() {
         waitElement(adjustDropdown);
         click(adjustDropdown);
         waitElement(adjustDropdownSelection);

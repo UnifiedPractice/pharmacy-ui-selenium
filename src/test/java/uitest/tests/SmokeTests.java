@@ -16,6 +16,7 @@ import uitest.pageobjects.IngredientsPage;
 import uitest.pageobjects.LoginPage;
 import uitest.pageobjects.PatientlistPage;
 import uitest.pageobjects.PlaceOrderPage;
+import uitest.pageobjects.PatientimportPage;
 
 class SmokeTests extends TestNgTestBase {
 
@@ -24,6 +25,7 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.pass);
         page.GetInstance(PatientlistPage.class).startOrder();
         page.GetInstance(IngredientsPage.class).addIngredients();
+        page.GetInstance(IngredientsPage.class).roundupIngredients();
         page.GetInstance(IngredientsPage.class).checkoutOrder();
         page.GetInstance(PlaceOrderPage.class).placeOrder();
         page.GetInstance(PatientlistPage.class).assertOrder(Variables.orderSent);
@@ -48,7 +50,7 @@ class SmokeTests extends TestNgTestBase {
     }
 
     @Test
-    public void adjustAdd_inventory() throws InterruptedException {
+    public void adjustAdd_inventory() {
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
         page.GetInstance(AdminHomePage.class).enter_ProductCatalog();
         page.GetInstance(ProductCatalogPage.class).startAdjust();
@@ -58,7 +60,7 @@ class SmokeTests extends TestNgTestBase {
     }
 
     @Test
-    public void adjustRemove_inventory() throws InterruptedException {
+    public void adjustRemove_inventory() {
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
         page.GetInstance(AdminHomePage.class).enter_ProductCatalog();
         page.GetInstance(ProductCatalogPage.class).startAdjust();
@@ -68,13 +70,22 @@ class SmokeTests extends TestNgTestBase {
     }
 
     @Test
-    public void receive_inventory() throws InterruptedException {
+    public void receive_inventory() {
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
         page.GetInstance(AdminHomePage.class).enter_ProductCatalog();
         page.GetInstance(ProductCatalogPage.class).startReceive();
         page.GetInstance(ProductCatalogPage.class).selectItem();
         page.GetInstance(ProductCatalogPage.class).quantityReceival(Variables.lotQuantity, Variables.expiryDate);
         page.GetInstance(ProductCatalogPage.class).assertChange(Variables.succesfullAdjustment);
+    }
+
+    @Test
+    public void patient_import() {
+        page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.pass);
+        page.GetInstance(PractitionerHomePage.class).enter_patientImportPage();
+        page.GetInstance(PatientimportPage.class).uploadFile();
+        page.GetInstance(PatientimportPage.class).validateFile();
+        page.GetInstance(PatientimportPage.class).finishImport();
     }
 
 }
