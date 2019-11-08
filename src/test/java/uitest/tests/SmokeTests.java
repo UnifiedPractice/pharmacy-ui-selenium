@@ -8,6 +8,7 @@ import uitest.TestNgTestBase;
 import uitest.Variables;
 import uitest.pageobjects.AdminHomePage;
 import uitest.pageobjects.CommissionsPage;
+import uitest.pageobjects.CouponCodesPage;
 import uitest.pageobjects.DispensaryPage;
 import uitest.pageobjects.PractitionerHomePage;
 import uitest.pageobjects.ProductCatalogPage;
@@ -75,6 +76,15 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(ProductCatalogPage.class).selectItem();
         page.GetInstance(ProductCatalogPage.class).quantityReceival(Variables.lotQuantity, Variables.expiryDate);
         page.GetInstance(ProductCatalogPage.class).assertChange(Variables.succesfullAdjustment);
+    }
+
+    @Test
+    public void add_new_coupon() throws InterruptedException {
+        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
+        page.GetInstance(AdminHomePage.class).enter_CouponCodes();
+        page.GetInstance(CouponCodesPage.class).set_new_Coupon("HELIO001", "description", "$2", "23",
+                Variables.Active_from_Date, Variables.Active_toDate, "3");
+
     }
 
 }
