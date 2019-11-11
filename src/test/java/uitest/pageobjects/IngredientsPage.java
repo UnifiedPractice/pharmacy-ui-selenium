@@ -26,6 +26,9 @@ public class IngredientsPage extends BasePage {
     public void addIngredients() {
         waitElement(addIngredient);
         click(addIngredient);
+    }
+
+    public void roundupIngredients() {
         waitElement(roundUp);
         click(roundUp);
     }
@@ -38,7 +41,6 @@ public class IngredientsPage extends BasePage {
             click(checkoutOrder);
         }
         return new PlaceOrderPage(driver);
-
     }
 
 }

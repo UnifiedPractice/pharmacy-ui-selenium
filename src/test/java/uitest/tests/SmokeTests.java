@@ -17,6 +17,7 @@ import uitest.pageobjects.IngredientsPage;
 import uitest.pageobjects.LoginPage;
 import uitest.pageobjects.PatientlistPage;
 import uitest.pageobjects.PlaceOrderPage;
+import uitest.pageobjects.PatientimportPage;
 
 class SmokeTests extends TestNgTestBase {
 
@@ -25,6 +26,7 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.pass);
         page.GetInstance(PatientlistPage.class).startOrder();
         page.GetInstance(IngredientsPage.class).addIngredients();
+        page.GetInstance(IngredientsPage.class).roundupIngredients();
         page.GetInstance(IngredientsPage.class).checkoutOrder();
         page.GetInstance(PlaceOrderPage.class).placeOrder();
         page.GetInstance(PatientlistPage.class).assertOrder(Variables.orderSent);
@@ -49,7 +51,7 @@ class SmokeTests extends TestNgTestBase {
     }
 
     @Test
-    public void adjustAdd_inventory() throws InterruptedException {
+    public void adjustAdd_inventory() {
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
         page.GetInstance(AdminHomePage.class).enter_ProductCatalog();
         page.GetInstance(ProductCatalogPage.class).startAdjust();
@@ -59,7 +61,7 @@ class SmokeTests extends TestNgTestBase {
     }
 
     @Test
-    public void adjustRemove_inventory() throws InterruptedException {
+    public void adjustRemove_inventory() {
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
         page.GetInstance(AdminHomePage.class).enter_ProductCatalog();
         page.GetInstance(ProductCatalogPage.class).startAdjust();
@@ -69,7 +71,7 @@ class SmokeTests extends TestNgTestBase {
     }
 
     @Test
-    public void receive_inventory() throws InterruptedException {
+    public void receive_inventory() {
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
         page.GetInstance(AdminHomePage.class).enter_ProductCatalog();
         page.GetInstance(ProductCatalogPage.class).startReceive();
@@ -79,12 +81,20 @@ class SmokeTests extends TestNgTestBase {
     }
 
     @Test
-    public void add_new_coupon() throws InterruptedException {
+    public void add_new_coupon() {
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
         page.GetInstance(AdminHomePage.class).enter_CouponCodes();
         page.GetInstance(CouponCodesPage.class).set_new_Coupon("HELIO001", "description", "$2", "23",
                 Variables.Active_from_Date, Variables.Active_toDate, "3");
+    }
 
+    @Test
+    public void patient_import() {
+        page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.pass);
+        page.GetInstance(PractitionerHomePage.class).enter_patientImportPage();
+        page.GetInstance(PatientimportPage.class).uploadFile();
+        page.GetInstance(PatientimportPage.class).validateFile();
+        page.GetInstance(PatientimportPage.class).finishImport();
     }
 
 }
