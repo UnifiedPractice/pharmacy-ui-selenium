@@ -41,8 +41,4 @@ public class Variables {
     // Lot Adjustment quantites
     public static String lotQuantity = "12";
 
-    // Active From
-    public static String Active_from_Date = "11/20/2019";
-    // Active To
-    public static String Active_toDate = "11/30/2019";
 }
