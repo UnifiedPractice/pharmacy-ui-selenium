@@ -67,7 +67,6 @@ public class CouponCodesPage extends BasePage {
         writeText(active_to, active_to);
         writeText(uses_per_practitioner, uses);
         click(save);
-
     }
 
 }

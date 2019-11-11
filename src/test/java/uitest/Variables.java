@@ -20,8 +20,8 @@ public class Variables {
     public static String orderSent = "ORDER SENT";
     public static String patientListBtnEM = "PATIENT LIST";
     public static String escapedString = "×&#10;Successfully updated commissions.";
-
-    public static String succesfullAdjustment = "";
+    public static String succesfulAdjustment = "";
+    public static String successfulImport = " You have successfully imported 1 patients";
 
     // Add Patient Info
     public static String firstName = UUID.randomUUID().toString();
@@ -41,8 +41,10 @@ public class Variables {
     // Lot Adjustment quantites
     public static String lotQuantity = "12";
 
-    // Active From
+    // Active From\To: CouponCodesPage
     public static String Active_from_Date = "11/20/2019";
-    // Active To
     public static String Active_toDate = "11/30/2019";
+
+    // Javascript executor commands
+    public static String uploadJS = "arguments[0].removeAttribute('style')";
 }

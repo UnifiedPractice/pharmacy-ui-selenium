@@ -57,7 +57,7 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(ProductCatalogPage.class).startAdjust();
         page.GetInstance(ProductCatalogPage.class).selectItem();
         page.GetInstance(ProductCatalogPage.class).quantityAddition(Variables.lotQuantity);
-        page.GetInstance(ProductCatalogPage.class).assertChange(Variables.succesfullAdjustment);
+        page.GetInstance(ProductCatalogPage.class).assertChange(Variables.succesfulAdjustment);
     }
 
     @Test
@@ -67,7 +67,7 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(ProductCatalogPage.class).startAdjust();
         page.GetInstance(ProductCatalogPage.class).selectItem();
         page.GetInstance(ProductCatalogPage.class).quantityRemoval(Variables.lotQuantity);
-        page.GetInstance(ProductCatalogPage.class).assertChange(Variables.succesfullAdjustment);
+        page.GetInstance(ProductCatalogPage.class).assertChange(Variables.succesfulAdjustment);
     }
 
     @Test
@@ -77,7 +77,7 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(ProductCatalogPage.class).startReceive();
         page.GetInstance(ProductCatalogPage.class).selectItem();
         page.GetInstance(ProductCatalogPage.class).quantityReceival(Variables.lotQuantity, Variables.expiryDate);
-        page.GetInstance(ProductCatalogPage.class).assertChange(Variables.succesfullAdjustment);
+        page.GetInstance(ProductCatalogPage.class).assertChange(Variables.succesfulAdjustment);
     }
 
     @Test
@@ -89,12 +89,13 @@ class SmokeTests extends TestNgTestBase {
     }
 
     @Test
-    public void patient_import() {
+    public void patient_import() throws InterruptedException {
         page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.pass);
         page.GetInstance(PractitionerHomePage.class).enter_patientImportPage();
         page.GetInstance(PatientimportPage.class).uploadFile();
         page.GetInstance(PatientimportPage.class).validateFile();
         page.GetInstance(PatientimportPage.class).finishImport();
+        page.GetInstance(PatientimportPage.class).assertImport(Variables.successfulImport);
     }
 
 }
