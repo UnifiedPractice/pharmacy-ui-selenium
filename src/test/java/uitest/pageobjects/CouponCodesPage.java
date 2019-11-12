@@ -41,20 +41,20 @@ public class CouponCodesPage extends BasePage {
     @FindBy(css = "[formcontrolname='couponValue'] [type='text']")
     WebElement coupon_value;
 
-    @FindBy(css = ".dx-dropdowneditor.ng-dirty [aria-haspopup]")
+    @FindBy(xpath = "//ufc-add-edit-coupon-modal/div/div[@class='modal-dialog']/div[@class='modal-content']/form/div[@class='modal-body']/div[3]/div[@class='col-md-5 col-sm-12 form-row']/div/div[@class='user-box__item']/dx-date-box//input[@role='combobox']")
     WebElement active_from;
 
-    @FindBy(css = ".dx-texteditor-empty.dx-dropdowneditor [aria-haspopup]")
+    @FindBy(xpath = "//ufc-add-edit-coupon-modal/div/div[@class='modal-dialog']/div[@class='modal-content']/form/div[@class='modal-body']//div[@class='col-md-6 col-sm-12 form-row']/div/div[@class='user-box__item']/dx-date-box//input[@role='combobox']")
     WebElement active_to;
 
-    @FindBy(css = ".dx-texteditor-empty.ng-touched [type='text']")
+    @FindBy(css = ".ng-valid.dx-numberbox.dx-texteditor-empty [type='text']")
     WebElement uses_per_practitioner;
 
     @FindBy(css = "[type='success'] .dx-button-content")
     WebElement save;
 
     public void set_new_Coupon(String code, String description, String min_value, String order_value,
-            String active_from, String active_to, String uses) {
+            String active_from1, String active_to1, String uses) {
         waitElement(add_new_Coupon);
         click(add_new_Coupon);
         writeText(coupon_code, code);
@@ -63,10 +63,13 @@ public class CouponCodesPage extends BasePage {
         click(coupon_type_dropdown);
         click(coupon_type_select);
         writeText(coupon_value, order_value);
-        writeText(active_from, active_from);
-        writeText(active_to, active_to);
+        click(active_from);
+        writeText(active_from, active_from1);
+        click(active_to);
+        writeText(active_to, active_to1);
         writeText(uses_per_practitioner, uses);
         click(save);
+        waitElement(show_inactive_coupons);
     }
 
 }
