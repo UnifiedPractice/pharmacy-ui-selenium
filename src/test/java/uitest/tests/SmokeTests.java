@@ -11,6 +11,7 @@ import uitest.pageobjects.CommissionsPage;
 import uitest.pageobjects.CouponCodesPage;
 import uitest.pageobjects.DispensaryPage;
 import uitest.pageobjects.PractitionerHomePage;
+import uitest.pageobjects.PractitionerProfilePage;
 import uitest.pageobjects.ProductCatalogPage;
 import uitest.pageobjects.ShippingPage;
 import uitest.pageobjects.IngredientsPage;
@@ -88,14 +89,22 @@ class SmokeTests extends TestNgTestBase {
                 Variables.Active_from_Date, Variables.Active_toDate, "3");
     }
 
-    @Test
+    @Test // done
     public void patient_import() throws InterruptedException {
         page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.pass);
         page.GetInstance(PractitionerHomePage.class).enter_patientImportPage();
-        page.GetInstance(PatientimportPage.class).uploadFile();
+        page.GetInstance(PatientimportPage.class).uploadFile(Variables.uploadJS);
         page.GetInstance(PatientimportPage.class).validateFile();
         page.GetInstance(PatientimportPage.class).finishImport();
         page.GetInstance(PatientimportPage.class).assertImport(Variables.successfulImport);
+    }
+
+    @Test
+    public void upload_logo() {
+        page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.pass);
+        page.GetInstance(PractitionerHomePage.class).enter_myAccountPage();
+        page.GetInstance(PractitionerProfilePage.class).addLogo(Variables.uploadJS);
+        page.GetInstance(PractitionerProfilePage.class).saveLogo();
     }
 
 }

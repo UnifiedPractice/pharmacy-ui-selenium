@@ -30,11 +30,13 @@ public class PatientimportPage extends BasePage {
 
     @FindBy(css = "[class] .import-result:nth-of-type(1)")
     WebElement importSuccess;
+    @FindBy(css = "[class] .import-result:nth-of-type(3) .dx-button-text")
+    WebElement importOther;
     String filePath = "C:/Users/Andrew/Desktop/MyImport3333.csv";
 
-    public void uploadFile() throws InterruptedException {
+    public void uploadFile(String expected) throws InterruptedException {
         Thread.sleep(2000);
-        ((JavascriptExecutor) driver).executeScript(Variables.uploadJS, hiddenUpload);
+        ((JavascriptExecutor) driver).executeScript(expected, hiddenUpload);
         writeText(hiddenUpload, filePath);
     }
 
@@ -48,12 +50,16 @@ public class PatientimportPage extends BasePage {
     }
 
     public void finishImport() {
-        waitElement(finishImport);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         click(finishImport);
     }
 
     public void assertImport(String expected) {
-        waitElement(importSuccess);
+        waitElement(importOther);
         Assert.assertEquals(readText(importSuccess), expected);
     }
 }

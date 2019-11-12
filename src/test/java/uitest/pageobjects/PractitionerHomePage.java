@@ -69,12 +69,9 @@ public class PractitionerHomePage extends BasePage {
     }
 
     public void enter_myAccountPage() {
-        if (myAccount.isDisplayed()) {
-            click(myAccount);
-        } else {
-            waitElement(myAccount);
-            click(myAccount);
-        }
+        waitElement(myAccount);
+        click(myAccount);
+
     }
 
     public void enter_orderReportPage() {

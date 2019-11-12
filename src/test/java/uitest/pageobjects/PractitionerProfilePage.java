@@ -5,6 +5,7 @@ package uitest.pageobjects;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.JavascriptExecutor;
 
 import uitest.BasePage;
 
@@ -13,6 +14,7 @@ public class PractitionerProfilePage extends BasePage {
         super(driver);
     }
 
+    // Password
     @FindBy(css = "[type='normal'] .dx-button-text")
     WebElement changePass;
     @FindBy(css = ".dx-show-clear-button.ng-touched [type]")
@@ -21,8 +23,19 @@ public class PractitionerProfilePage extends BasePage {
     WebElement newPass;
     @FindBy(css = ".dx-editor-underlined.dx-show-clear-button.dx-textbox.dx-texteditor.dx-texteditor-empty.dx-widget.ng-pristine.ng-touched.ng-valid  input[role='textbox']")
     WebElement confirmPass;
-    @FindBy(css = ".c-user-box.ng-star-inserted [type='default'] .dx-button-text")
+
+    // Confirm buttons
+    @FindBy(css = "[class] .c-user-box:nth-child(3) .dx-button-content")
     WebElement save;
+
+    // Logo
+    @FindBy(css = ".logo-link")
+    WebElement logo;
+    @FindBy(css = "[name='logo'] [data-max-size]")
+    WebElement logoInput;
+    String filePath = "C:/Users/Andrew/Desktop/300x120.png";
+    @FindBy(css = ".logo-undo-link.pull-right")
+    WebElement undo;
 
     public void enterPassword() {
         waitElement(changePass);
@@ -34,6 +47,17 @@ public class PractitionerProfilePage extends BasePage {
     }
 
     public void changePassword() {
+        click(save);
+    }
+
+    public void addLogo(String expected) {
+        waitElement(logo);
+        ((JavascriptExecutor) driver).executeScript(expected, logoInput);
+        writeText(logoInput, filePath);
+    }
+
+    public void saveLogo() {
+        waitElement(undo);
         click(save);
     }
 
