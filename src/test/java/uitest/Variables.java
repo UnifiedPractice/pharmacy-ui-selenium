@@ -47,4 +47,14 @@ public class Variables {
 
     // Javascript executor commands
     public static String uploadJS = "arguments[0].removeAttribute('style')";
+
+    //Registration Credentials
+    public static String fName = "James";
+    public static String lName = "Deen";
+    public static String clinicName = "JamesDees";
+    public static String zipcode = "123123";
+    public static String license = "123456789";
+    public static String address = "RandomAddress";
+    
+
 }

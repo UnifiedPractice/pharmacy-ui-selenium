@@ -14,7 +14,7 @@ public class IngredientsPage extends BasePage {
         super(driver);
     }
 
-    @FindBy(css = ".dx-scrollable-content [role='row']:nth-of-type(1) .material-icons")
+    @FindBy(css = ".dx-scrollable-content [role='row']:nth-of-type(4) .material-icons")
     WebElement addIngredient;
 
     @FindBy(css = "[tabindex='-1']:nth-of-type(2) span")
@@ -23,14 +23,17 @@ public class IngredientsPage extends BasePage {
     @FindBy(css = ".draft-order__actions [tabindex='0']:nth-of-type(2)")
     WebElement checkoutOrder;
 
+    @FindBy(css = "dx-number-box [type='text']")
+    WebElement setQ;
+
     public void addIngredients() {
         waitElement(addIngredient);
         click(addIngredient);
     }
 
     public void roundupIngredients() {
-        waitElement(roundUp);
-        click(roundUp);
+        writeText(setQ, "10");
+
     }
 
     public PlaceOrderPage checkoutOrder() {

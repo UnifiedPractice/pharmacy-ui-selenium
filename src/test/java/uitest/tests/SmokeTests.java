@@ -23,7 +23,7 @@ import uitest.pageobjects.PatientimportPage;
 class SmokeTests extends TestNgTestBase {
 
     @Test
-    public void placeOrder() {
+    public void placeOrder() throws InterruptedException {
         page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.pass);
         page.GetInstance(PatientlistPage.class).startOrder();
         page.GetInstance(IngredientsPage.class).addIngredients();
@@ -40,6 +40,7 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(DispensaryPage.class).startOrder();
         page.GetInstance(ShippingPage.class).select_item();
         page.GetInstance(ShippingPage.class).completeQuantities();
+       
         page.GetInstance(ShippingPage.class).shipOrder();
     }
 

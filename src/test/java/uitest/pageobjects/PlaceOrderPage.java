@@ -34,9 +34,9 @@ public class PlaceOrderPage extends BasePage {
     @FindBy(css = ".summary-page__orderbox-send .dx-button-content")
     WebElement sendOrder;
 
-    public PatientlistPage placeOrder() {
+    public PatientlistPage placeOrder() throws InterruptedException {
         waitElement(sendOrder);
-        click(yesDropship);
+        click(noDropship);
         click(amazon);
         click(clinicPayment);
         click(termsAgreement);

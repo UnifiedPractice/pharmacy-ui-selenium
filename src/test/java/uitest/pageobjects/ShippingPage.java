@@ -63,7 +63,9 @@ public class ShippingPage extends BasePage {
         Thread.sleep(2000);
         click(done);
         waitElement(done_ship);
+
         click(done_ship);
         return new DispensaryPage(driver);
     }
+
 }

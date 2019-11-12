@@ -27,6 +27,9 @@ public class LoginPage extends BasePage {
 
     @FindBy(css = "up-login-box .row:nth-child(2) div")
     WebElement credentialError;
+    // New Account Registration
+    @FindBy(css = "[tabindex='5']")
+    WebElement newAccount;
 
     public PractitionerHomePage login(String user, String pass) {
         waitElement(username);
@@ -40,5 +43,11 @@ public class LoginPage extends BasePage {
     public void verifyCredentials() {
         waitElement(credentialError);
         Assert.assertEquals(readText(credentialError), Variables.loginEM);
+    }
+
+    public RegistrationPage enter_Registration() {
+        waitElement(newAccount);
+        click(newAccount);
+        return new RegistrationPage(driver);
     }
 }
