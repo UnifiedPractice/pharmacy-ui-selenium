@@ -58,15 +58,11 @@ public class PractitionerHomePage extends BasePage {
 
     }
 
-    public CommissionsPage enter_commissionsPage() {
-        if (commissions.isDisplayed()) {
-            click(commissions);
-        } else {
-            waitElement(commissions);
-            click(commissions);
-        }
-        return new CommissionsPage(driver);
+    public void enter_commissionsPage() {
+        waitElement(commissions);
+        click(commissions);
     }
+
 
     public void enter_myAccountPage() {
         waitElement(myAccount);

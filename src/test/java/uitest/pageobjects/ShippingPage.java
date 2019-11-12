@@ -51,7 +51,6 @@ public class ShippingPage extends BasePage {
         waitElement(lotNumberSelect);
         click(lotNumberSelect);
         waitElement(sendQuantity);
-        // String minQ = readText(minQuantity);
         String minQ = driver.findElement(By.cssSelector(".rx-item-number-min [type='text']"))
                 .getAttribute("aria-valuenow");
         writeText(measuredQuantity, minQ);
@@ -62,8 +61,7 @@ public class ShippingPage extends BasePage {
     public DispensaryPage shipOrder() throws InterruptedException {
         Thread.sleep(2000);
         click(done);
-        waitElement(done_ship);
-
+        Thread.sleep(8000);
         click(done_ship);
         return new DispensaryPage(driver);
     }

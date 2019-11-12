@@ -39,7 +39,7 @@ public class CommissionsPage extends BasePage {
     WebElement popUp;
 
     public void set_Commission() throws InterruptedException {
-        waitElement(setBulk);
+        Thread.sleep(2000);
         click(setBulk);
         Thread.sleep(2000);
         click(powder);

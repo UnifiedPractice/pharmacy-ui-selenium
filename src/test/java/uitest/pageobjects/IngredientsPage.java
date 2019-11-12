@@ -32,7 +32,8 @@ public class IngredientsPage extends BasePage {
     }
 
     public void roundupIngredients() {
-        writeText(setQ, "10");
+        writeText(setQ, "1");
+
 
     }
 

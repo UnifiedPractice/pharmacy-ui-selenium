@@ -13,6 +13,7 @@ import uitest.pageobjects.DispensaryPage;
 import uitest.pageobjects.PractitionerHomePage;
 import uitest.pageobjects.PractitionerProfilePage;
 import uitest.pageobjects.ProductCatalogPage;
+import uitest.pageobjects.RegistrationPage;
 import uitest.pageobjects.ShippingPage;
 import uitest.pageobjects.IngredientsPage;
 import uitest.pageobjects.LoginPage;
@@ -29,7 +30,7 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(IngredientsPage.class).addIngredients();
         page.GetInstance(IngredientsPage.class).roundupIngredients();
         page.GetInstance(IngredientsPage.class).checkoutOrder();
-        page.GetInstance(PlaceOrderPage.class).placeOrder();
+        page.GetInstance(PlaceOrderPage.class).test();
         page.GetInstance(PatientlistPage.class).assertOrder(Variables.orderSent);
     }
 
@@ -40,11 +41,11 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(DispensaryPage.class).startOrder();
         page.GetInstance(ShippingPage.class).select_item();
         page.GetInstance(ShippingPage.class).completeQuantities();
-       
         page.GetInstance(ShippingPage.class).shipOrder();
+        page.GetInstance(DispensaryPage.class).assertTitle();
     }
 
-    @Test
+    @Test // done
     public void setCommission() throws InterruptedException {
         page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.pass);
         page.GetInstance(PractitionerHomePage.class).enter_commissionsPage();
@@ -52,7 +53,7 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(CommissionsPage.class).assert_Commission();
     }
 
-    @Test
+    @Test // done
     public void adjustAdd_inventory() {
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
         page.GetInstance(AdminHomePage.class).enter_ProductCatalog();
@@ -62,7 +63,7 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(ProductCatalogPage.class).assertChange(Variables.succesfulAdjustment);
     }
 
-    @Test
+    @Test // done
     public void adjustRemove_inventory() {
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
         page.GetInstance(AdminHomePage.class).enter_ProductCatalog();
@@ -72,7 +73,7 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(ProductCatalogPage.class).assertChange(Variables.succesfulAdjustment);
     }
 
-    @Test
+    @Test // done
     public void receive_inventory() {
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
         page.GetInstance(AdminHomePage.class).enter_ProductCatalog();
@@ -100,12 +101,22 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(PatientimportPage.class).assertImport(Variables.successfulImport);
     }
 
-    @Test
-    public void upload_logo() {
+    @Test // done
+    public void upload_logo() throws InterruptedException {
         page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.pass);
         page.GetInstance(PractitionerHomePage.class).enter_myAccountPage();
         page.GetInstance(PractitionerProfilePage.class).addLogo(Variables.uploadJS);
         page.GetInstance(PractitionerProfilePage.class).saveLogo();
+    }
+
+    @Test // done
+    public void practitionerRegistration() throws InterruptedException {
+        page.GetInstance(LoginPage.class).enter_Registration();
+        page.GetInstance(RegistrationPage.class).writeCredentials();
+        page.GetInstance(RegistrationPage.class).selectDropdowns();
+        page.GetInstance(RegistrationPage.class).uploadLicense(Variables.uploadJS);
+        page.GetInstance(RegistrationPage.class).submitApplication();
+        Thread.sleep(5000);
     }
 
 }

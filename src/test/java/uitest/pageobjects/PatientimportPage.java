@@ -6,6 +6,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
+
+import java.io.File;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 
@@ -32,12 +35,13 @@ public class PatientimportPage extends BasePage {
     WebElement importSuccess;
     @FindBy(css = "[class] .import-result:nth-of-type(3) .dx-button-text")
     WebElement importOther;
-    String filePath = "C:/Users/Andrew/Desktop/MyImport3333.csv";
+    String filePath = "src/test/java/uitest/uploadDocuments/MyImport3333.csv";
 
     public void uploadFile(String expected) throws InterruptedException {
         Thread.sleep(2000);
+        String basepath = new File(filePath).getAbsolutePath();
         ((JavascriptExecutor) driver).executeScript(expected, hiddenUpload);
-        writeText(hiddenUpload, filePath);
+        writeText(hiddenUpload, basepath);
     }
 
     public void validateFile() {
