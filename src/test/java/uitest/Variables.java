@@ -1,8 +1,10 @@
 package uitest;
 
+import java.util.Random;
 import java.util.UUID;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.text.StringEscapeUtils;
+import org.openqa.selenium.WebElement;
 
 public class Variables {
     // URLs
@@ -20,8 +22,8 @@ public class Variables {
     public static String orderSent = "ORDER SENT";
     public static String patientListBtnEM = "PATIENT LIST";
     public static String escapedString = "×&#10;Successfully updated commissions.";
-    public static String succesfulAdjustment = "";
-    public static String successfulImport = "You have successfully imported 1 patients";
+
+    public static String succesfullAdjustment = "";
 
     // Add Patient Info
     public static String firstName = UUID.randomUUID().toString();
@@ -41,20 +43,19 @@ public class Variables {
     // Lot Adjustment quantites
     public static String lotQuantity = "12";
 
-    // Active From\To: CouponCodesPage
+    // Active From
     public static String Active_from_Date = "11/20/2019";
+    // Active To
     public static String Active_toDate = "11/30/2019";
 
     // Javascript executor commands
     public static String uploadJS = "arguments[0].removeAttribute('style')";
 
-    //Registration Credentials
+     //Registration Credentials
     public static String fName = "James";
     public static String lName = "Deen";
     public static String clinicName = "JamesDees";
     public static String zipcode = "123123";
     public static String license = "123456789";
     public static String address = "RandomAddress";
-    
-
 }
