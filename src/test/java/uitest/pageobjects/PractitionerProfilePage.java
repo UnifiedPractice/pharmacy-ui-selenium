@@ -5,6 +5,11 @@ package uitest.pageobjects;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.nio.file.Path;
+
 import org.openqa.selenium.JavascriptExecutor;
 
 import uitest.BasePage;
@@ -29,11 +34,12 @@ public class PractitionerProfilePage extends BasePage {
     WebElement save;
 
     // Logo
-    @FindBy(css = ".logo-link")
+    // @FindBy(css = ".logo-link")
+    @FindBy(linkText = "ADDLOGO")
     WebElement logo;
     @FindBy(css = "[name='logo'] [data-max-size]")
     WebElement logoInput;
-    String filePath = "C:/Users/Andrew/Desktop/300x120.png";
+    String filePath = "src/test/java/uitest/uploadimage/300x120.png";
     @FindBy(css = ".logo-undo-link.pull-right")
     WebElement undo;
 
@@ -51,9 +57,11 @@ public class PractitionerProfilePage extends BasePage {
     }
 
     public void addLogo(String expected) {
+
+        String basepath = new File(filePath).getAbsolutePath();
         waitElement(logo);
         ((JavascriptExecutor) driver).executeScript(expected, logoInput);
-        writeText(logoInput, filePath);
+        writeText(logoInput, basepath);
     }
 
     public void saveLogo() {
