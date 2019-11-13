@@ -57,7 +57,7 @@ public class CouponCodesPage extends BasePage {
             String active_to1, String uses) {
         waitElement(add_new_Coupon);
         click(add_new_Coupon);
-        RandomNumber(coupon_code);
+        randomNumber(coupon_code);
         writeText(coupon_description, description);
         writeText(minimum_order_number, min_value);
         click(coupon_type_dropdown);

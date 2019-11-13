@@ -55,8 +55,8 @@ public class BasePage extends PageGenerator {
         }
     }
 
-    // Random Name
-    public <T> void RandomName(T elementAttr) {
+    // Random Name write text
+    public <T> void randomName(T elementAttr) {
         String[] names = { "EARL", "AMELIA", "OLIVIA", "EMILY", "AVA", "ISLA", "JESSICA", "POPPY", "ISABELLA", "SOPHIE",
                 "MIA", "RUBY", "LILY", "GRACE", "EVIE", "SOPHIA", "ELLA", "SCARLETT", "CHLOE", "ISABELLE", " FREYA",
                 "CHARLOTTE", "SIENNA", "DAISY", "PHOEBE", "MILLIE", "EVA", "ALICE", "LUCY", "FLORENCE", "SOFIA",
@@ -86,8 +86,8 @@ public class BasePage extends PageGenerator {
         }
     }
 
-    // Random Number
-    public <T> void RandomNumber(T elementAttr) {
+    // Random Number write
+    public <T> void randomNumber(T elementAttr) {
         Random number = new Random();
         int randomnumber = number.nextInt(50);
         if (elementAttr.getClass().getName().contains("By")) {
@@ -107,8 +107,9 @@ public class BasePage extends PageGenerator {
     }
 
     public void assertDownload(String file) {
-        File folder = new File(System.getProperty("user.dir"));
+        File folder = new File(System.getProperty("user.home") + "/Downloads/");
         File[] listOfFiles = folder.listFiles();
+        System.out.println("Files are :" + listOfFiles);
         boolean found = false;
         File f = null;
 
@@ -122,7 +123,12 @@ public class BasePage extends PageGenerator {
                 }
             }
         }
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         Assert.assertTrue(found, "Downloaded document is not found");
-        f.deleteOnExit();
+        f.delete();
     }
 }

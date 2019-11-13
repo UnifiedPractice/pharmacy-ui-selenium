@@ -24,7 +24,7 @@ public class PractitionerHomePage extends BasePage {
     WebElement commissions;
     @FindBy(css = ".site-menu .ng-star-inserted:nth-of-type(4) .site-menu-title")
     WebElement myAccount;
-    @FindBy(css = "body > up-root > up-container > up-sidebar > div > div.site-menubar-body.scrollable.scrollable-inverse.scrollable-vertical.hoverscorll-disabled.is-enabled.is-hovering > div > div > ul > li.site-menu-item.has-sub.ng-star-inserted.hover.open > a > span")
+    @FindBy(css = ".has-sub > .ng-star-inserted:nth-child(1)")
     WebElement orderReport;
     @FindBy(css = ".site-menu-sub-item.ng-star-inserted .site-menu-title")
     WebElement orderReportSelect;
@@ -63,7 +63,6 @@ public class PractitionerHomePage extends BasePage {
         click(commissions);
     }
 
-
     public void enter_myAccountPage() {
         waitElement(myAccount);
         click(myAccount);
@@ -73,7 +72,6 @@ public class PractitionerHomePage extends BasePage {
     public void enter_orderReportPage() {
         waitElement(orderReport);
         click(orderReport);
-        waitElement(orderReportSelect);
         click(orderReportSelect);
     }
 

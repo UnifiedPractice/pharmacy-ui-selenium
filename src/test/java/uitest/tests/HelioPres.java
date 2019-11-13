@@ -20,9 +20,12 @@ class HelioPres extends TestNgTestBase {
         page.GetInstance(RegistrationPage.class).submitApplication();
     }
 
-    
-
-    
-
+    @Test
+    public void orderReport_Export() {
+        page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.pass);
+        page.GetInstance(PractitionerHomePage.class).enter_orderReportPage();
+        page.GetInstance(OrderReportPage.class).exportFile();
+        page.GetInstance(OrderReportPage.class).assertExport();
+    }
 
 }
