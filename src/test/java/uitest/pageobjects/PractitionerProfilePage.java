@@ -57,7 +57,6 @@ public class PractitionerProfilePage extends BasePage {
     }
 
     public void addLogo(String expected) {
-
         String basepath = new File(filePath).getAbsolutePath();
         waitElement(logo);
         ((JavascriptExecutor) driver).executeScript(expected, logoInput);

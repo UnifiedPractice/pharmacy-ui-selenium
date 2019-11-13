@@ -5,7 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
+import java.io.File;
 import java.util.List;
 
 public class BasePage extends PageGenerator {
@@ -59,5 +61,25 @@ public class BasePage extends PageGenerator {
             popup.get(0).click();
             Thread.sleep(200);
         }
+    }
+
+    public void assertDownload(String file) {
+        File folder = new File(System.getProperty("user.dir"));
+        File[] listOfFiles = folder.listFiles();
+        boolean found = false;
+        File f = null;
+
+        for (File listOfFile : listOfFiles) {
+            if (listOfFile.isFile()) {
+                String fileName = listOfFile.getName();
+                System.out.println("File " + listOfFile.getName());
+                if (fileName.matches(file)) {
+                    f = new File(fileName);
+                    found = true;
+                }
+            }
+        }
+        Assert.assertTrue(found, "Downloaded document is not found");
+        f.deleteOnExit();
     }
 }
