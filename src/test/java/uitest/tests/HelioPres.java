@@ -28,4 +28,13 @@ class HelioPres extends TestNgTestBase {
         page.GetInstance(OrderReportPage.class).assertExport();
     }
 
+    @Test
+    public void upload_certificate() throws InterruptedException {
+        page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.pass);
+        page.GetInstance(PractitionerHomePage.class).enter_myAccountPage();
+        page.GetInstance(PractitionerProfilePage.class).uploadCertificate(Variables.uploadJS);
+        page.GetInstance(PractitionerProfilePage.class).complete_userProfile();
+        page.GetInstance(PractitionerProfilePage.class).saveCertificate();
+    }
+
 }

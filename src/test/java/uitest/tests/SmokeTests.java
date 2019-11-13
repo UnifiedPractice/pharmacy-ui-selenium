@@ -54,7 +54,7 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(CommissionsPage.class).assert_Commission();
     }
 
-    @Test // done
+    @Test // done - pending toast messages
     public void adjustAdd_inventory() {
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
         page.GetInstance(AdminHomePage.class).enter_ProductCatalog();
@@ -64,7 +64,7 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(ProductCatalogPage.class).assertChange(Variables.succesfulAdjustment);
     }
 
-    @Test // done
+    @Test // done - pending toast messages
     public void adjustRemove_inventory() {
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
         page.GetInstance(AdminHomePage.class).enter_ProductCatalog();
@@ -74,7 +74,7 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(ProductCatalogPage.class).assertChange(Variables.succesfulAdjustment);
     }
 
-    @Test // done
+    @Test // done - pending toast messages
     public void receive_inventory() {
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
         page.GetInstance(AdminHomePage.class).enter_ProductCatalog();
@@ -102,11 +102,11 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(PatientimportPage.class).assertImport(Variables.successfulImport);
     }
 
-    @Test // done
+    @Test // done - pending toast messages
     public void upload_logo() throws InterruptedException {
         page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.pass);
         page.GetInstance(PractitionerHomePage.class).enter_myAccountPage();
-        page.GetInstance(PractitionerProfilePage.class).addLogo(Variables.uploadJS);
+        page.GetInstance(PractitionerProfilePage.class).uploadLogo(Variables.uploadJS);
         page.GetInstance(PractitionerProfilePage.class).saveLogo();
     }
 
