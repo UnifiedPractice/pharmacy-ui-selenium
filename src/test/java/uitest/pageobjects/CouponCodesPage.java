@@ -53,11 +53,11 @@ public class CouponCodesPage extends BasePage {
     @FindBy(css = "[type='success'] .dx-button-content")
     WebElement save;
 
-    public void set_new_Coupon(String code, String description, String min_value, String order_value,
-            String active_from1, String active_to1, String uses) {
+    public void set_new_Coupon(String description, String min_value, String order_value, String active_from1,
+            String active_to1, String uses) {
         waitElement(add_new_Coupon);
         click(add_new_Coupon);
-        writeText(coupon_code, code);
+        RandomNumber(coupon_code);
         writeText(coupon_description, description);
         writeText(minimum_order_number, min_value);
         click(coupon_type_dropdown);
@@ -69,7 +69,6 @@ public class CouponCodesPage extends BasePage {
         writeText(active_to, active_to1);
         writeText(uses_per_practitioner, uses);
         click(save);
-        waitElement(show_inactive_coupons);
     }
 
 }

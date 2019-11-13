@@ -23,7 +23,8 @@ public class Variables {
     public static String patientListBtnEM = "PATIENT LIST";
     public static String escapedString = "×&#10;Successfully updated commissions.";
 
-    public static String succesfullAdjustment = "";
+    public static String succesfulAdjustment = "";
+    public static String successfulImport = "";
 
     // Add Patient Info
     public static String firstName = UUID.randomUUID().toString();
@@ -51,7 +52,7 @@ public class Variables {
     // Javascript executor commands
     public static String uploadJS = "arguments[0].removeAttribute('style')";
 
-     //Registration Credentials
+    // Registration Credentials
     public static String fName = "James";
     public static String lName = "Deen";
     public static String clinicName = "JamesDees";

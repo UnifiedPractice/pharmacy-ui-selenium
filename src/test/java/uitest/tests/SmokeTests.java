@@ -4,6 +4,7 @@ package uitest.tests;
 
 import org.testng.annotations.Test;
 
+import uitest.BasePage;
 import uitest.TestNgTestBase;
 import uitest.Variables;
 import uitest.pageobjects.AdminHomePage;
@@ -87,8 +88,8 @@ class SmokeTests extends TestNgTestBase {
     public void add_new_coupon() {
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
         page.GetInstance(AdminHomePage.class).enter_CouponCodes();
-        page.GetInstance(CouponCodesPage.class).set_new_Coupon("HELIO001", "description", "$2", "23",
-                Variables.Active_from_Date, Variables.Active_toDate, "3");
+        page.GetInstance(CouponCodesPage.class).set_new_Coupon("description", "$2", "23", Variables.Active_from_Date,
+                Variables.Active_toDate, "3");
     }
 
     @Test // done
