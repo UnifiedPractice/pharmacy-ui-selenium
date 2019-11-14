@@ -31,6 +31,10 @@ public class LoginPage extends BasePage {
     @FindBy(css = "[tabindex='5']")
     WebElement newAccount;
 
+    public void openHelioscript() {
+        driver.get(Variables.helioUrl);
+    }
+
     public PractitionerHomePage login(String user, String pass) {
         waitElement(username);
         writeText(username, user);
@@ -40,7 +44,7 @@ public class LoginPage extends BasePage {
         return new PractitionerHomePage(driver);
     }
 
-    public void verifyCredentials() {
+    public void verify_invalidUser() {
         waitElement(credentialError);
         Assert.assertEquals(readText(credentialError), Variables.loginEM);
     }

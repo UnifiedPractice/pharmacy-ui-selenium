@@ -2,18 +2,15 @@
 
 package uitest.pageobjects;
 
+import java.io.File;
+
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
-import java.io.File;
-
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-
 import uitest.BasePage;
-import uitest.Variables;
 
 public class PatientimportPage extends BasePage {
     public PatientimportPage(WebDriver driver) {
@@ -26,7 +23,7 @@ public class PatientimportPage extends BasePage {
     WebElement uploadPatient;
 
     @FindBy(css = ".col-6.mb-20.mt-20.ng-star-inserted.text-center > dx-button[role='button']  span")
-    WebElement validate;
+    WebElement validate;;
 
     @FindBy(css = ".dx-button-text")
     WebElement finishImport;

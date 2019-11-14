@@ -2,6 +2,8 @@
 
 package uitest.pageobjects;
 
+import java.util.Arrays;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -78,16 +80,21 @@ public class PatientlistPage extends BasePage {
     // Finished order
     @FindBy(css = ".modal-title")
     WebElement orderSent;
+    @FindBy(css = ".order-sent-modal__info")
+    WebElement orderNumber;
+    @FindBy(css = ".modal-footer [type='button']:nth-of-type(1)")
+    WebElement orderDetails;
+
+    // Logout buttons
+    @FindBy(css = ".md-chevron-down")
+    WebElement logDrop;
+    @FindBy(css = "li:nth-of-type(2) [role] [role='menuitem']:nth-child(3)")
+    WebElement logout;
 
     public IngredientsPage startOrder() {
         waitElement(startOrder);
         click(startOrder);
         return new IngredientsPage(driver);
-    }
-
-    public void assertOrder(String expectedText) {
-        waitElement(orderSent);
-        Assert.assertEquals(readText(orderSent), expectedText);
     }
 
     public void addPatient() {
@@ -107,7 +114,7 @@ public class PatientlistPage extends BasePage {
         click(phoneNumberDropdown);
         waitElement(phoneNumberSelect);
         click(phoneNumberSelect);
-    
+
         click(countryDropdown);
         waitElement(countrySelect);
         click(countrySelect);
@@ -117,6 +124,35 @@ public class PatientlistPage extends BasePage {
         click(stateSelect);
 
         click(saveButton);
+    }
+
+    public void get_orderDetails() {
+        waitElement(orderDetails);
+        click(orderDetails);
+    }
+
+    public String get_orderName() {
+        waitElement(orderNumber);
+        // Get Sentence
+        String order = readText(orderNumber);
+        // Split sentence words
+        String[] words = order.split("\\s+");
+        // Replace special character of the 2nd word
+        String orderNumber = words[1].replace("#", "");
+        System.out.println("This is the extracted word: " + orderNumber);
+        return orderNumber.toString();
+    }
+
+    public void assertOrder(String expectedText) {
+        waitElement(orderSent);
+        Assert.assertEquals(readText(orderSent), expectedText);
+    }
+
+    public LoginPage logout() {
+        waitElement(logDrop);
+        click(logDrop);
+        click(logout);
+        return new LoginPage(driver);
     }
 
 }

@@ -60,36 +60,26 @@ public class PlaceOrderPage extends BasePage {
     @FindBy(css = "[data-bind] [role='option']:nth-of-type(1) .dx-list-item-content")
     WebElement stateSelection;
 
-    public PatientlistPage placeOrder() throws InterruptedException {
+    public void placeOrder() throws InterruptedException {
         waitElement(sendOrder);
-        click(noDropship);
-        click(amazon);
-        click(clinicPayment);
-        click(termsAgreement);
-        click(sendOrder);
-        return new PatientlistPage(driver);
-    }
-
-    public void test() throws InterruptedException {
-        Thread.sleep(5000);
-        click(noDropship);
+        click(yesDropship);
         Thread.sleep(3000);
-        if (firstName.isDisplayed()) {
-            writeText(firstName, "Test");
-            writeText(lastName, "Test");
-            writeText(address, "Test");
-            writeText(city, "Test");
-            writeText(zipcode, "0");
-            click(country);
-            waitElement(countrySelection);
-            click(countrySelection);
-            Thread.sleep(2000);
-            click(state);
-            waitElement(stateSelection);
-            click(stateSelection);
-        } else {
-            System.out.println("no data");
-        }
+        // if (firstName.isDisplayed()) {
+        // writeText(firstName, "Test");
+        // writeText(lastName, "Test");
+        // writeText(address, "1918 Mutton Town Road");
+        // writeText(city, "Test");
+        // writeText(zipcode, "61820");
+        // click(country);
+        // waitElement(countrySelection);
+        // click(countrySelection);
+        // Thread.sleep(3000);
+        // click(state);
+        // waitElement(stateSelection);
+        // click(stateSelection);
+        // } else {
+        // System.out.println("Info is already completed");
+        // }
         click(amazon);
         click(clinicPayment);
         click(termsAgreement);
