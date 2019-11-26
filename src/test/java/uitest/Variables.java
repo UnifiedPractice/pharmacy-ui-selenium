@@ -24,7 +24,7 @@ public class Variables {
     public static String escapedString = "×&#10;Successfully updated commissions.";
 
     public static String succesfulAdjustment = "";
-    public static String successfulImport = "";
+    public static String successfulPatientImport = "You have successfully imported 1 patients";
 
     // Add Patient Info
     public static String firstName = UUID.randomUUID().toString();

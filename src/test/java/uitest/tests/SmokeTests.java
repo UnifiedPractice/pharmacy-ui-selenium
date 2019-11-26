@@ -24,7 +24,7 @@ import uitest.pageobjects.PatientimportPage;
 
 class SmokeTests extends TestNgTestBase {
 
-    @Test
+    @Test // DONE
     public void placeOrder() throws InterruptedException {
         page.GetInstance(LoginPage.class).openHelioscript();
         page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.pass);
@@ -37,7 +37,7 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(PatientlistPage.class).assertOrder(Variables.orderSent);
     }
 
-    @Test
+    @Test // DONE
     public void shipOrder() throws InterruptedException {
         page.GetInstance(LoginPage.class).openHelioscript();
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
@@ -49,7 +49,7 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(DispensaryPage.class).assertTitle();
     }
 
-    @Test // done
+    @Test // DONE
     public void setCommission() throws InterruptedException {
         page.GetInstance(LoginPage.class).openHelioscript();
         page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.pass);
@@ -91,7 +91,7 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(ProductCatalogPage.class).assertChange(Variables.succesfulAdjustment);
     }
 
-    @Test
+    @Test // test case to be done with order with coupon applied
     public void add_new_coupon() {
         page.GetInstance(LoginPage.class).openHelioscript();
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
@@ -108,7 +108,7 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(PatientimportPage.class).uploadFile(Variables.uploadJS);
         page.GetInstance(PatientimportPage.class).validateFile();
         page.GetInstance(PatientimportPage.class).finishImport();
-        page.GetInstance(PatientimportPage.class).assertImport(Variables.successfulImport);
+        page.GetInstance(PatientimportPage.class).assertImport(Variables.successfulPatientImport);
     }
 
     @Test // done - pending toast messages

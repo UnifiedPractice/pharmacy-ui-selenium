@@ -33,8 +33,6 @@ public class IngredientsPage extends BasePage {
 
     public void roundupIngredients() {
         writeText(setQ, "1");
-
-
     }
 
     public PlaceOrderPage checkoutOrder() {

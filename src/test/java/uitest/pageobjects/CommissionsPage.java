@@ -36,22 +36,25 @@ public class CommissionsPage extends BasePage {
     WebElement byMediums;
 
     @FindBy(css = "div#toast-container > .ng-trigger.ng-trigger-flyInOut.ngx-toastr.toast-success")
-    WebElement popUp;
+    WebElement confirmationPop;
+
+    // Last loaded page elements
+    @FindBy(css = "tr:nth-of-type(11) > td:nth-of-type(9)")
+    WebElement lastElement;
 
     public void set_Commission() throws InterruptedException {
-        Thread.sleep(2000);
+        waitElement(lastElement);
         click(setBulk);
-        Thread.sleep(2000);
+        waitElement(powder);
         click(powder);
-        Thread.sleep(2000);
+        waitElement(powderInput);
         writeText(powderInput, "5");
-        Thread.sleep(2000);
         click(byCategories);
         click(applyBulk);
     }
 
-    public void assert_Commission() {
-        waitElement(popUp);
-        Assert.assertEquals(readText(popUp), Variables.unEscapedHTML);
+    public void assert_Commission() throws InterruptedException {
+        waitElement(confirmationPop);
+        Assert.assertEquals(readText(confirmationPop), Variables.unEscapedHTML);
     }
 }

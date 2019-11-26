@@ -80,9 +80,7 @@ public class PractitionerProfilePage extends BasePage {
     }
 
     public void uploadCertificate(String expected) throws InterruptedException {
-
         Thread.sleep(3500);
-
         String basepath = new File(filePath).getAbsolutePath();
         ((JavascriptExecutor) driver).executeScript(expected, uploadInput);
         writeText(uploadInput, basepath);

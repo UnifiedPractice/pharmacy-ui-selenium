@@ -24,8 +24,8 @@ public class ShippingPage extends BasePage {
     WebElement lotNumber;
     @FindBy(css = ".dx-scrollview-content [role='option']:nth-of-type(1) .row")
     WebElement lotNumberSelect;
-    // Quantities
 
+    // Quantities
     @FindBy(css = ".rx-item-number-min [type='text']")
     WebElement minQuantity;
 
@@ -40,12 +40,12 @@ public class ShippingPage extends BasePage {
     @FindBy(css = "dx-button:nth-of-type(1)  .dx-button-text")
     WebElement done_ship;
 
-    public void select_item() throws InterruptedException {
+    public void select_item() {
         waitElement(itemSelect);
         click(itemSelect);
     }
 
-    public void completeQuantities() throws InterruptedException {
+    public void completeQuantities() {
         waitElement(lotNumber);
         click(lotNumber);
         waitElement(lotNumberSelect);

@@ -41,6 +41,7 @@ public class AdminHomePage extends BasePage {
     // Notifications
     @FindBy(css = "[class='nav-item ng-tns-c3-0 ng-star-inserted'] .nav-link")
     WebElement notifications;
+    // findELements
     @FindBy(xpath = "")
     String notificationList;
 
@@ -82,17 +83,14 @@ public class AdminHomePage extends BasePage {
         List<WebElement> notifications = driver.findElements(By.xpath(notificationList));
         for (int i = 1; i <= notifications.size(); i++) {
             notifications = driver.findElements(By.xpath(notificationList));
-
             // Waiting for the element to be visible
             // (i-1) because the list's item start with 0th index
             wait.until(ExpectedConditions.visibilityOf(notifications.get(i - 1)));
-
             // Clicking on the first element
             notifications.get(i - 1).click();
             driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             System.out.print(i + " element clicked\t--");
             System.out.println("pass");
-
         }
 
     }

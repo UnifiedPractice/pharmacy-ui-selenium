@@ -30,9 +30,9 @@ public class DispensaryPage extends BasePage {
     WebElement title;
 
     public ShippingPage startOrder() throws InterruptedException {
-        Thread.sleep(3000);
+        waitElement(today);
         click(today);
-        Thread.sleep(1000);
+        waitElement(startOrder);
         click(startOrder);
         return new ShippingPage(driver);
     }

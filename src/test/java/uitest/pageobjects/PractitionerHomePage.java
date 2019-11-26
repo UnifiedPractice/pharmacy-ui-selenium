@@ -52,34 +52,37 @@ public class PractitionerHomePage extends BasePage {
         return new PatientlistPage(driver);
     }
 
-    public void enter_patientImportPage() {
+    public PatientimportPage enter_patientImportPage() {
         waitElement(patientImport);
         click(patientImport);
-
+        return new PatientimportPage(driver);
     }
 
-    public void enter_commissionsPage() {
+    public CommissionsPage enter_commissionsPage() {
         waitElement(commissions);
         click(commissions);
+        return new CommissionsPage(driver);
     }
 
-    public void enter_myAccountPage() {
+    public PractitionerProfilePage enter_myAccountPage() {
         waitElement(myAccount);
         click(myAccount);
-
+        return new PractitionerProfilePage(driver);
     }
 
-    public void enter_orderReportPage() {
+    public OrderReportPage enter_orderReportPage() {
         waitElement(orderReport);
         click(orderReport);
         click(orderReportSelect);
+        return new OrderReportPage(driver);
     }
 
-    public void logout() {
+    public LoginPage logout() {
         waitElement(practitioner);
         click(practitioner);
         waitElement(logout);
         click(logout);
+        return new LoginPage(driver);
     }
 
 }
