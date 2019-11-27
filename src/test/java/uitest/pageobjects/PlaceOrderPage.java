@@ -26,7 +26,9 @@ public class PlaceOrderPage extends BasePage {
 
     // Payment Method
     @FindBy(css = ".shipping-details__box .ng-star-inserted:nth-child(2) [name='payment']")
-    WebElement clinicPayment;
+    WebElement clinicPay;
+    @FindBy(css = "div:nth-of-type(2) > .radio-custom > input[name='payment']")
+    WebElement onlinePay;
 
     // Terms and conditions
     @FindBy(css = ".summary-page__orderbox-send input")
@@ -63,7 +65,7 @@ public class PlaceOrderPage extends BasePage {
     public void placeOrder() throws InterruptedException {
         waitElement(sendOrder);
         click(yesDropship);
-        Thread.sleep(3000);
+        Thread.sleep(1500);
         // if (firstName.isDisplayed()) {
         // writeText(firstName, "Test");
         // writeText(lastName, "Test");

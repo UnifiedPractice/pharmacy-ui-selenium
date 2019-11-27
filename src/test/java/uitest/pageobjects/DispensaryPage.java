@@ -29,7 +29,7 @@ public class DispensaryPage extends BasePage {
     @FindBy(css = ".orders-page__title")
     WebElement title;
 
-    public ShippingPage startOrder() throws InterruptedException {
+    public ShippingPage startOrder() {
         waitElement(today);
         click(today);
         waitElement(startOrder);

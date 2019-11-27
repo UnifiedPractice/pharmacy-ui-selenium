@@ -42,7 +42,7 @@ public class CommissionsPage extends BasePage {
     @FindBy(css = "tr:nth-of-type(11) > td:nth-of-type(9)")
     WebElement lastElement;
 
-    public void set_Commission() throws InterruptedException {
+    public void set_Commission() {
         waitElement(lastElement);
         click(setBulk);
         waitElement(powder);
@@ -53,7 +53,7 @@ public class CommissionsPage extends BasePage {
         click(applyBulk);
     }
 
-    public void assert_Commission() throws InterruptedException {
+    public void assert_Commission() {
         waitElement(confirmationPop);
         Assert.assertEquals(readText(confirmationPop), Variables.unEscapedHTML);
     }
