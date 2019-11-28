@@ -29,6 +29,8 @@ public class AdminHomePage extends BasePage {
 
     @FindBy(css = ".site-menu .has-sub:nth-of-type(3) .material-icons.ng-star-inserted")
     WebElement settingsDropdown;
+    @FindBy(css = "li:nth-of-type(3) > .ng-star-inserted.site-menu-sub > li:nth-of-type(4) > .ng-star-inserted  .site-menu-title")
+    WebElement practitionerApplications;
 
     @FindBy(css = ".site-menu > .ng-star-inserted:nth-of-type(4) .site-menu-title")
     WebElement couponCodes;
@@ -51,6 +53,21 @@ public class AdminHomePage extends BasePage {
         waitElement(productCatalog);
         click(productCatalog);
         return new ProductCatalogPage(driver);
+    }
+
+    public PractitionerApplicationsPage enter_PractitionerApplications() {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        if (practitionerApplications.isDisplayed()) {
+            click(practitionerApplications);
+        } else {
+            click(settingsDropdown);
+            click(practitionerApplications);
+        }
+        return new PractitionerApplicationsPage(driver);
     }
 
     public DispensaryPage enter_Dispensary() {

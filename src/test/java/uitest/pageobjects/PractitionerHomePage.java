@@ -15,7 +15,7 @@ public class PractitionerHomePage extends BasePage {
         super(driver);
     }
 
-    // Menu Buttons
+    // Side-Menu locators
     @FindBy(css = ".site-menu .site-menu-item.ng-star-inserted:nth-of-type(1) .site-menu-title")
     WebElement patientList;
     @FindBy(css = ".site-menu > .ng-star-inserted:nth-of-type(2) .site-menu-title")
@@ -29,7 +29,7 @@ public class PractitionerHomePage extends BasePage {
     @FindBy(css = ".site-menu-sub-item.ng-star-inserted .site-menu-title")
     WebElement orderReportSelect;
 
-    // Practitioner top-right buttons
+    // Practitioner top-right locators
     @FindBy(css = ".md-chevron-down")
     WebElement practitioner;
     @FindBy(css = "li:nth-of-type(2) > div[role='menu'] > a:nth-of-type(1)")

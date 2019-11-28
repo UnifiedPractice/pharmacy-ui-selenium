@@ -109,14 +109,14 @@ public class BasePage extends PageGenerator {
     public void assertDownload(String file) {
         File folder = new File(System.getProperty("user.home") + "/Downloads/");
         File[] listOfFiles = folder.listFiles();
-        System.out.println("Files are :" + listOfFiles);
+        // System.out.println("Files are :" + listOfFiles);
         boolean found = false;
         File f = null;
 
         for (File listOfFile : listOfFiles) {
             if (listOfFile.isFile()) {
                 String fileName = listOfFile.getName();
-                System.out.println("File " + listOfFile.getName());
+                // System.out.println("File " + listOfFile.getName());
                 if (fileName.matches(file)) {
                     f = new File(fileName);
                     found = true;
@@ -129,6 +129,14 @@ public class BasePage extends PageGenerator {
             e.printStackTrace();
         }
         Assert.assertTrue(found, "Downloaded document is not found");
-        f.delete();
+        System.out.println("Path of the file is: " + f.getPath());
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        f.deleteOnExit();
+
     }
+
 }

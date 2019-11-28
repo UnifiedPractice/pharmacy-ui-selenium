@@ -28,7 +28,7 @@ class HelioPres extends TestNgTestBase {
         page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.pass);
         page.GetInstance(PractitionerHomePage.class).enter_orderReportPage();
         page.GetInstance(OrderReportPage.class).exportFile();
-        page.GetInstance(OrderReportPage.class).assertExport();
+        page.GetInstance(OrderReportPage.class).assertExport(Variables.orderReport);
     }
 
     @Test // done - pending toast messages

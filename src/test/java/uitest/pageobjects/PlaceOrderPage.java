@@ -62,10 +62,14 @@ public class PlaceOrderPage extends BasePage {
     @FindBy(css = "[data-bind] [role='option']:nth-of-type(1) .dx-list-item-content")
     WebElement stateSelection;
 
-    public void placeOrder() throws InterruptedException {
+    public void placeOrder() {
         waitElement(sendOrder);
         click(yesDropship);
-        Thread.sleep(1500);
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         // if (firstName.isDisplayed()) {
         // writeText(firstName, "Test");
         // writeText(lastName, "Test");
@@ -83,9 +87,8 @@ public class PlaceOrderPage extends BasePage {
         // System.out.println("Info is already completed");
         // }
         click(amazon);
-        click(clinicPayment);
+        click(clinicPay);
         click(termsAgreement);
         click(sendOrder);
     }
-
 }

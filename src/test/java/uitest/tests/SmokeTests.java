@@ -20,6 +20,7 @@ import uitest.pageobjects.IngredientsPage;
 import uitest.pageobjects.LoginPage;
 import uitest.pageobjects.PatientlistPage;
 import uitest.pageobjects.PlaceOrderPage;
+import uitest.pageobjects.PractitionerApplicationsPage;
 import uitest.pageobjects.PatientimportPage;
 
 class SmokeTests extends TestNgTestBase {
@@ -144,5 +145,15 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(PatientlistPage.class).logout();
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
         // page.GetInstance(AdminHomePage.class).
+    }
+
+    @Test
+    public void practitioner_RegistrationApproval() throws InterruptedException {
+        page.GetInstance(LoginPage.class).openHelioscript();
+        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
+        page.GetInstance(AdminHomePage.class).enter_PractitionerApplications();
+        page.GetInstance(PractitionerApplicationsPage.class).selectStatus_New();
+        page.GetInstance(PractitionerApplicationsPage.class).approve_application();
+        page.GetInstance(PractitionerApplicationsPage.class).assert_approval(Variables.registrationApproval);
     }
 }

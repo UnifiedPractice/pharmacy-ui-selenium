@@ -2,12 +2,9 @@
 
 package uitest.pageobjects;
 
-import java.util.List;
-
-import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.*;
 
 import uitest.BasePage;
 
@@ -25,14 +22,17 @@ public class OrderReportPage extends BasePage {
     @FindBy(css = "")
     WebElement changePass;
 
-    String fileName = "order-report.csv";
-
     public void exportFile() {
         waitElement(exportCSV);
         click(exportCSV);
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void assertExport() {
+    public void assertExport(String fileName) {
         assertDownload(fileName);
     }
 }

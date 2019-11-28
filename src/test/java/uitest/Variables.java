@@ -40,7 +40,7 @@ public class Variables {
     // Special char parser and randomizer
     public static String s = RandomStringUtils.randomAlphabetic(8);
     public static String unEscapedHTML = StringEscapeUtils.unescapeHtml4(escapedString);
-
+    public static String registrationApproval = StringEscapeUtils.unescapeHtml4("×&#10;Email invite sent");
     // Lot Adjustment quantites
     public static String lotQuantity = "12";
 
@@ -59,4 +59,7 @@ public class Variables {
     public static String zipcode = "123123";
     public static String license = "123456789";
     public static String address = "RandomAddress";
+
+    // Import file names
+    public static String orderReport = "order-report.csv";
 }
