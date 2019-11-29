@@ -1,10 +1,9 @@
 package uitest;
 
-import java.util.Random;
 import java.util.UUID;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.text.StringEscapeUtils;
-import org.openqa.selenium.WebElement;
 
 public class Variables {
     // URLs
@@ -12,10 +11,13 @@ public class Variables {
 
     // Accounts and passwords
     public static String practitioner = "practitioner@mail.com";
-    public static String pass = "Up1234$#@!";
+    public static String actualPass = "Up1234$#@!";
     public static String invalidPass = "custom1";
     public static String invalidUser = "custom1@test.com";
     public static String admin = "admin@mail.com";
+
+    public static String newPass = "Test123!";
+    public static String confirmPass = "Test123!";
 
     // Error messages
     public static String loginEM = "info The username/password couple is invalid.";
@@ -60,6 +62,6 @@ public class Variables {
     public static String license = "123456789";
     public static String address = "RandomAddress";
 
-    // Import file names
+    // Exported file names
     public static String orderReport = "order-report.csv";
 }

@@ -28,7 +28,7 @@ class SmokeTests extends TestNgTestBase {
     @Test // DONE
     public void placeOrder() throws InterruptedException {
         page.GetInstance(LoginPage.class).openHelioscript();
-        page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.pass);
+        page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.actualPass);
         page.GetInstance(PatientlistPage.class).startOrder();
         page.GetInstance(IngredientsPage.class).addIngredients();
         page.GetInstance(IngredientsPage.class).roundupIngredients();
@@ -41,7 +41,7 @@ class SmokeTests extends TestNgTestBase {
     @Test // DONE
     public void shipOrder() throws InterruptedException {
         page.GetInstance(LoginPage.class).openHelioscript();
-        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
+        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
         page.GetInstance(AdminHomePage.class).enter_Dispensary();
         page.GetInstance(DispensaryPage.class).startOrder();
         page.GetInstance(ShippingPage.class).select_item();
@@ -53,7 +53,7 @@ class SmokeTests extends TestNgTestBase {
     @Test // DONE
     public void setCommission() throws InterruptedException {
         page.GetInstance(LoginPage.class).openHelioscript();
-        page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.pass);
+        page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.actualPass);
         page.GetInstance(PractitionerHomePage.class).enter_commissionsPage();
         page.GetInstance(CommissionsPage.class).set_Commission();
         page.GetInstance(CommissionsPage.class).assert_Commission();
@@ -62,7 +62,7 @@ class SmokeTests extends TestNgTestBase {
     @Test // done - pending toast messages
     public void adjustAdd_inventory() {
         page.GetInstance(LoginPage.class).openHelioscript();
-        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
+        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
         page.GetInstance(AdminHomePage.class).enter_ProductCatalog();
         page.GetInstance(ProductCatalogPage.class).startAdjust();
         page.GetInstance(ProductCatalogPage.class).selectItem();
@@ -73,7 +73,7 @@ class SmokeTests extends TestNgTestBase {
     @Test // done - pending toast messages
     public void adjustRemove_inventory() {
         page.GetInstance(LoginPage.class).openHelioscript();
-        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
+        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
         page.GetInstance(AdminHomePage.class).enter_ProductCatalog();
         page.GetInstance(ProductCatalogPage.class).startAdjust();
         page.GetInstance(ProductCatalogPage.class).selectItem();
@@ -84,7 +84,7 @@ class SmokeTests extends TestNgTestBase {
     @Test // done - pending toast messages
     public void receive_inventory() {
         page.GetInstance(LoginPage.class).openHelioscript();
-        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
+        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
         page.GetInstance(AdminHomePage.class).enter_ProductCatalog();
         page.GetInstance(ProductCatalogPage.class).startReceive();
         page.GetInstance(ProductCatalogPage.class).selectItem();
@@ -95,7 +95,7 @@ class SmokeTests extends TestNgTestBase {
     @Test // test case to be done with order with coupon applied
     public void add_new_coupon() {
         page.GetInstance(LoginPage.class).openHelioscript();
-        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
+        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
         page.GetInstance(AdminHomePage.class).enter_CouponCodes();
         page.GetInstance(CouponCodesPage.class).set_new_Coupon("description", "$2", "23", Variables.Active_from_Date,
                 Variables.Active_toDate, "3");
@@ -104,7 +104,7 @@ class SmokeTests extends TestNgTestBase {
     @Test // done
     public void patient_import() throws InterruptedException {
         page.GetInstance(LoginPage.class).openHelioscript();
-        page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.pass);
+        page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.actualPass);
         page.GetInstance(PractitionerHomePage.class).enter_patientImportPage();
         page.GetInstance(PatientimportPage.class).uploadFile(Variables.uploadJS);
         page.GetInstance(PatientimportPage.class).validateFile();
@@ -115,7 +115,7 @@ class SmokeTests extends TestNgTestBase {
     @Test // done - pending toast messages
     public void upload_logo() throws InterruptedException {
         page.GetInstance(LoginPage.class).openHelioscript();
-        page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.pass);
+        page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.actualPass);
         page.GetInstance(PractitionerHomePage.class).enter_myAccountPage();
         page.GetInstance(PractitionerProfilePage.class).uploadLogo(Variables.uploadJS);
         page.GetInstance(PractitionerProfilePage.class).saveLogo();
@@ -134,7 +134,7 @@ class SmokeTests extends TestNgTestBase {
     @Test // not done
     public void assert_LateOrder() throws InterruptedException {
         page.GetInstance(LoginPage.class).openHelioscript();
-        page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.pass);
+        page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.actualPass);
         page.GetInstance(PatientlistPage.class).startOrder();
         page.GetInstance(IngredientsPage.class).addIngredients();
         page.GetInstance(IngredientsPage.class).roundupIngredients();
@@ -143,17 +143,28 @@ class SmokeTests extends TestNgTestBase {
         Thread.sleep(4000);
         page.GetInstance(PatientlistPage.class).get_orderName();
         page.GetInstance(PatientlistPage.class).logout();
-        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
+        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
         // page.GetInstance(AdminHomePage.class).
     }
 
     @Test
     public void practitioner_RegistrationApproval() throws InterruptedException {
         page.GetInstance(LoginPage.class).openHelioscript();
-        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
+        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
         page.GetInstance(AdminHomePage.class).enter_PractitionerApplications();
         page.GetInstance(PractitionerApplicationsPage.class).selectStatus_New();
         page.GetInstance(PractitionerApplicationsPage.class).approve_application();
         page.GetInstance(PractitionerApplicationsPage.class).assert_approval(Variables.registrationApproval);
+    }
+
+    @Test
+    public void change_practitionerPassword() {
+        page.GetInstance(LoginPage.class).openHelioscript();
+        page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.actualPass);
+        page.GetInstance(PractitionerHomePage.class).enter_myAccountPage();
+        page.GetInstance(PractitionerProfilePage.class).changePass_req(Variables.actualPass, Variables.newPass,
+                Variables.confirmPass);
+        page.GetInstance(PractitionerProfilePage.class).changePassword();
+
     }
 }

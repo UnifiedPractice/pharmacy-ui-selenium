@@ -60,12 +60,13 @@ public class AdminHomePage extends BasePage {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-        if (practitionerApplications.isDisplayed()) {
-            click(practitionerApplications);
-        } else {
-            click(settingsDropdown);
-            click(practitionerApplications);
+
+            if (practitionerApplications.isDisplayed()) {
+                click(practitionerApplications);
+            } else {
+                click(settingsDropdown);
+                click(practitionerApplications);
+            }
         }
         return new PractitionerApplicationsPage(driver);
     }
