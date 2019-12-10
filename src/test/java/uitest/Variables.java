@@ -7,7 +7,7 @@ import org.apache.commons.text.StringEscapeUtils;
 
 public class Variables {
     // URLs
-    public static String helioUrl = "http://sunten.staging.unifiedpractice.com/account/login";
+    public static String helioUrl = "http://sunten.stage.helioscript.com/account/login";
 
     // Accounts and passwords
     public static String practitioner = "practitioner@mail.com";

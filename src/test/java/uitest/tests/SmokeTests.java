@@ -4,24 +4,21 @@ package uitest.tests;
 
 import org.testng.annotations.Test;
 
-import uitest.BasePage;
 import uitest.TestNgTestBase;
 import uitest.Variables;
 import uitest.pageobjects.AdminHomePage;
 import uitest.pageobjects.CommissionsPage;
 import uitest.pageobjects.CouponCodesPage;
 import uitest.pageobjects.DispensaryPage;
+import uitest.pageobjects.InventoryPages;
+import uitest.pageobjects.LoginPage;
+import uitest.pageobjects.PatientimportPage;
+import uitest.pageobjects.PatientlistPage;
 import uitest.pageobjects.PractitionerHomePage;
 import uitest.pageobjects.PractitionerProfilePage;
-import uitest.pageobjects.ProductCatalogPage;
 import uitest.pageobjects.RegistrationPage;
-import uitest.pageobjects.ShippingPage;
-import uitest.pageobjects.IngredientsPage;
-import uitest.pageobjects.LoginPage;
-import uitest.pageobjects.PatientlistPage;
-import uitest.pageobjects.PlaceOrderPage;
-import uitest.pageobjects.PractitionerApplicationsPage;
-import uitest.pageobjects.PatientimportPage;
+import uitest.pageobjects.Settings;
+import uitest.pageobjects.Settings.PractitionerApplications;
 
 class SmokeTests extends TestNgTestBase {
 
@@ -30,10 +27,10 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(LoginPage.class).openHelioscript();
         page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.actualPass);
         page.GetInstance(PatientlistPage.class).startOrder();
-        page.GetInstance(IngredientsPage.class).addIngredients();
-        page.GetInstance(IngredientsPage.class).roundupIngredients();
-        page.GetInstance(IngredientsPage.class).checkoutOrder();
-        page.GetInstance(PlaceOrderPage.class).placeOrder();
+        page.GetInstance(PatientlistPage.IngredientsPage.class).addIngredients();
+        page.GetInstance(PatientlistPage.IngredientsPage.class).roundupIngredients();
+        page.GetInstance(PatientlistPage.IngredientsPage.class).checkoutOrder();
+        page.GetInstance(PatientlistPage.PlaceOrderPage.class).placeOrder();
         page.GetInstance(PatientlistPage.class).get_orderName();
         page.GetInstance(PatientlistPage.class).assertOrder(Variables.orderSent);
     }
@@ -44,9 +41,9 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
         page.GetInstance(AdminHomePage.class).enter_Dispensary();
         page.GetInstance(DispensaryPage.class).startOrder();
-        page.GetInstance(ShippingPage.class).select_item();
-        page.GetInstance(ShippingPage.class).completeQuantities();
-        page.GetInstance(ShippingPage.class).shipOrder();
+        page.GetInstance(DispensaryPage.ShippingPage.class).select_item();
+        page.GetInstance(DispensaryPage.ShippingPage.class).completeQuantities();
+        page.GetInstance(DispensaryPage.ShippingPage.class).shipOrder();
         page.GetInstance(DispensaryPage.class).assertTitle();
     }
 
@@ -59,15 +56,15 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(CommissionsPage.class).assert_Commission();
     }
 
-    @Test // done - pending toast messages
+    @Test // done
     public void adjustAdd_inventory() {
         page.GetInstance(LoginPage.class).openHelioscript();
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
         page.GetInstance(AdminHomePage.class).enter_ProductCatalog();
-        page.GetInstance(ProductCatalogPage.class).startAdjust();
-        page.GetInstance(ProductCatalogPage.class).selectItem();
-        page.GetInstance(ProductCatalogPage.class).quantityAddition(Variables.lotQuantity);
-        page.GetInstance(ProductCatalogPage.class).assertChange(Variables.succesfulAdjustment);
+        page.GetInstance(InventoryPages.ProductCatalog.class).startAdjust();
+        page.GetInstance(InventoryPages.ProductCatalog.class).selectItem();
+        page.GetInstance(InventoryPages.ProductCatalog.class).quantityAddition(Variables.lotQuantity);
+        page.GetInstance(InventoryPages.ProductCatalog.class).assertChange(Variables.succesfulAdjustment);
     }
 
     @Test // done - pending toast messages
@@ -75,10 +72,10 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(LoginPage.class).openHelioscript();
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
         page.GetInstance(AdminHomePage.class).enter_ProductCatalog();
-        page.GetInstance(ProductCatalogPage.class).startAdjust();
-        page.GetInstance(ProductCatalogPage.class).selectItem();
-        page.GetInstance(ProductCatalogPage.class).quantityRemoval(Variables.lotQuantity);
-        page.GetInstance(ProductCatalogPage.class).assertChange(Variables.succesfulAdjustment);
+        page.GetInstance(InventoryPages.ProductCatalog.class).startAdjust();
+        page.GetInstance(InventoryPages.ProductCatalog.class).selectItem();
+        page.GetInstance(InventoryPages.ProductCatalog.class).quantityRemoval(Variables.lotQuantity);
+        page.GetInstance(InventoryPages.ProductCatalog.class).assertChange(Variables.succesfulAdjustment);
     }
 
     @Test // done - pending toast messages
@@ -86,10 +83,11 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(LoginPage.class).openHelioscript();
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
         page.GetInstance(AdminHomePage.class).enter_ProductCatalog();
-        page.GetInstance(ProductCatalogPage.class).startReceive();
-        page.GetInstance(ProductCatalogPage.class).selectItem();
-        page.GetInstance(ProductCatalogPage.class).quantityReceival(Variables.lotQuantity, Variables.expiryDate);
-        page.GetInstance(ProductCatalogPage.class).assertChange(Variables.succesfulAdjustment);
+        page.GetInstance(InventoryPages.ProductCatalog.class).startReceive();
+        page.GetInstance(InventoryPages.ProductCatalog.class).selectItem();
+        page.GetInstance(InventoryPages.ProductCatalog.class).quantityReceival(Variables.lotQuantity,
+                Variables.expiryDate);
+        page.GetInstance(InventoryPages.ProductCatalog.class).assertChange(Variables.succesfulAdjustment);
     }
 
     @Test // test case to be done with order with coupon applied
@@ -136,10 +134,10 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(LoginPage.class).openHelioscript();
         page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.actualPass);
         page.GetInstance(PatientlistPage.class).startOrder();
-        page.GetInstance(IngredientsPage.class).addIngredients();
-        page.GetInstance(IngredientsPage.class).roundupIngredients();
-        page.GetInstance(IngredientsPage.class).checkoutOrder();
-        page.GetInstance(PlaceOrderPage.class).placeOrder();
+        page.GetInstance(PatientlistPage.IngredientsPage.class).addIngredients();
+        page.GetInstance(PatientlistPage.IngredientsPage.class).roundupIngredients();
+        page.GetInstance(PatientlistPage.IngredientsPage.class).checkoutOrder();
+        page.GetInstance(PatientlistPage.PlaceOrderPage.class).placeOrder();
         Thread.sleep(4000);
         page.GetInstance(PatientlistPage.class).get_orderName();
         page.GetInstance(PatientlistPage.class).logout();
@@ -152,9 +150,9 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(LoginPage.class).openHelioscript();
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
         page.GetInstance(AdminHomePage.class).enter_PractitionerApplications();
-        page.GetInstance(PractitionerApplicationsPage.class).selectStatus_New();
-        page.GetInstance(PractitionerApplicationsPage.class).approve_application();
-        page.GetInstance(PractitionerApplicationsPage.class).assert_approval(Variables.registrationApproval);
+        page.GetInstance(Settings.PractitionerApplications.class).selectStatus_New();
+        page.GetInstance(Settings.PractitionerApplications.class).approve_application();
+        page.GetInstance(Settings.PractitionerApplications.class).assert_approval(Variables.registrationApproval);
     }
 
     @Test

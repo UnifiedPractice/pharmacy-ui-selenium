@@ -12,6 +12,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import uitest.BasePage;
+import uitest.pageobjects.InventoryPages.ProductCatalog;
+import uitest.pageobjects.Settings.PractitionerApplications;
 
 public class AdminHomePage extends BasePage {
     public AdminHomePage(WebDriver driver) {
@@ -47,28 +49,27 @@ public class AdminHomePage extends BasePage {
     @FindBy(xpath = "")
     String notificationList;
 
-    public ProductCatalogPage enter_ProductCatalog() {
+    public ProductCatalog enter_ProductCatalog() {
         waitElement(inventoryDropdown);
         click(inventoryDropdown);
         waitElement(productCatalog);
         click(productCatalog);
-        return new ProductCatalogPage(driver);
+        return new ProductCatalog(driver);
     }
 
-    public PractitionerApplicationsPage enter_PractitionerApplications() {
+    public PractitionerApplications enter_PractitionerApplications() {
         try {
-            Thread.sleep(2000);
+            Thread.sleep(2500);
         } catch (InterruptedException e) {
             e.printStackTrace();
-
-            if (practitionerApplications.isDisplayed()) {
-                click(practitionerApplications);
-            } else {
-                click(settingsDropdown);
-                click(practitionerApplications);
-            }
         }
-        return new PractitionerApplicationsPage(driver);
+        if (practitionerApplications.isDisplayed()) {
+            click(practitionerApplications);
+        } else {
+            click(settingsDropdown);
+            click(practitionerApplications);
+        }
+        return new PractitionerApplications(driver);
     }
 
     public DispensaryPage enter_Dispensary() {
@@ -110,7 +111,6 @@ public class AdminHomePage extends BasePage {
             System.out.print(i + " element clicked\t--");
             System.out.println("pass");
         }
-
     }
 
 }

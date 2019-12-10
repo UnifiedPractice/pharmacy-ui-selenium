@@ -25,7 +25,7 @@ class HelioPres extends TestNgTestBase {
 
     @Test
     public void practitionerOrderReport_Export() {
-        page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.pass);
+        page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.actualPass);
         page.GetInstance(PractitionerHomePage.class).enter_orderReportPage();
         page.GetInstance(OrderReportPage.class).exportFile();
         page.GetInstance(OrderReportPage.class).assertExport(Variables.orderReport);
@@ -33,7 +33,7 @@ class HelioPres extends TestNgTestBase {
 
     @Test // done - pending toast messages
     public void upload_certificate() throws InterruptedException {
-        page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.pass);
+        page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.actualPass);
         page.GetInstance(PractitionerHomePage.class).enter_myAccountPage();
         page.GetInstance(PractitionerProfilePage.class).uploadCertificate(Variables.uploadJS);
         page.GetInstance(PractitionerProfilePage.class).complete_userProfile();
@@ -42,7 +42,7 @@ class HelioPres extends TestNgTestBase {
 
     @Test // pending implementation - TODO
     public void adminOrderReport_Export() {
-        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.pass);
+        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
         page.GetInstance(AdminHomePage.class).enter_ReportPage();
     }
 
