@@ -8,9 +8,9 @@ import uitest.TestNgTestBase;
 import uitest.Variables;
 import uitest.pageobjects.AdminHomePage;
 import uitest.pageobjects.LoginPage;
-import uitest.pageobjects.OrderReportPage;
 import uitest.pageobjects.PractitionerHomePage;
 import uitest.pageobjects.PractitionerProfilePage;
+import uitest.pageobjects.PractitionerReports;
 import uitest.pageobjects.RegistrationPage;
 
 class HelioPres extends TestNgTestBase {
@@ -27,11 +27,11 @@ class HelioPres extends TestNgTestBase {
     public void practitionerOrderReport_Export() {
         page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.actualPass);
         page.GetInstance(PractitionerHomePage.class).enter_orderReportPage();
-        page.GetInstance(OrderReportPage.class).exportFile();
-        page.GetInstance(OrderReportPage.class).assertExport(Variables.orderReport);
+        page.GetInstance(PractitionerReports.PractitionerOrderReportPage.class).exportFile();
+        page.GetInstance(PractitionerReports.PractitionerOrderReportPage.class).assertExport(Variables.orderReport);
     }
 
-    @Test // done - pending toast messages
+    @Test // done - pending toast messages - tracked bug in regards to this matter
     public void upload_certificate() throws InterruptedException {
         page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.actualPass);
         page.GetInstance(PractitionerHomePage.class).enter_myAccountPage();

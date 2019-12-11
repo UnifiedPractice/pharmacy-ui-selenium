@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import uitest.TestNgTestBase;
 import uitest.Variables;
 import uitest.pageobjects.AdminHomePage;
+import uitest.pageobjects.AdminSettings;
 import uitest.pageobjects.CommissionsPage;
 import uitest.pageobjects.CouponCodesPage;
 import uitest.pageobjects.DispensaryPage;
@@ -17,8 +18,6 @@ import uitest.pageobjects.PatientlistPage;
 import uitest.pageobjects.PractitionerHomePage;
 import uitest.pageobjects.PractitionerProfilePage;
 import uitest.pageobjects.RegistrationPage;
-import uitest.pageobjects.Settings;
-import uitest.pageobjects.Settings.PractitionerApplications;
 
 class SmokeTests extends TestNgTestBase {
 
@@ -150,9 +149,9 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(LoginPage.class).openHelioscript();
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
         page.GetInstance(AdminHomePage.class).enter_PractitionerApplications();
-        page.GetInstance(Settings.PractitionerApplications.class).selectStatus_New();
-        page.GetInstance(Settings.PractitionerApplications.class).approve_application();
-        page.GetInstance(Settings.PractitionerApplications.class).assert_approval(Variables.registrationApproval);
+        page.GetInstance(AdminSettings.PractitionerApplications.class).selectStatus_New();
+        page.GetInstance(AdminSettings.PractitionerApplications.class).approve_application();
+        page.GetInstance(AdminSettings.PractitionerApplications.class).assert_approval(Variables.registrationApproval);
     }
 
     @Test

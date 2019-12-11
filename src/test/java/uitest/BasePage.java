@@ -1,6 +1,8 @@
 package uitest;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -53,6 +55,33 @@ public class BasePage extends PageGenerator {
         } else {
             return ((WebElement) elementAttr).getText();
         }
+    }
+
+    // Clear Text
+    public <T> void clearText(T elementAttr) {
+        if (elementAttr.getClass().getName().contains("By")) {
+            driver.findElement((By) elementAttr).sendKeys(Keys.CONTROL, "a", Keys.DELETE);
+        } else {
+            ((WebElement) elementAttr).sendKeys(Keys.CONTROL, "a", Keys.DELETE);
+        }
+    }
+
+    // click element from dropdown
+    public <T> void click_element_from_dropdown(WebElement elementAttr, List<WebElement> element_List, String text) {
+        click(elementAttr);
+        for (WebElement element : element_List) {
+            if (element.getText().equals(text)) {
+                element.click();
+                break;
+            } else
+                continue;
+        }
+    }
+
+    // Scroll To Element
+    public <T> void scrollToElement(WebElement elementAttr) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", elementAttr);
     }
 
     // Random Name write text
@@ -136,7 +165,23 @@ public class BasePage extends PageGenerator {
             e.printStackTrace();
         }
         f.deleteOnExit();
-
     }
+
+    // public void assert_pageText() {
+    // boolean result = readText(offerTitle).toString().equals("")
+    // && readText(offerBody).toString().equals(
+    // "0")
+    // && readText(offerFooter).toString().equals(
+    // ".")
+    // && readText(licensed).toString()
+    // .equals("")
+    // && readText(topPayments).toString()
+    //////// .equals("")
+    // && readText(servicingCP).toString().equals("")
+    // && readText(amountDest).toString().equals("")
+    // && readText(aboutRecip).toString().equals("")
+    // && readText(finishTransfer).toString().equals("");
+    // Assert.assertTrue(result);
+    // }
 
 }

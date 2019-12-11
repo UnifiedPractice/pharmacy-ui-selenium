@@ -70,11 +70,11 @@ public class PractitionerHomePage extends BasePage {
         return new PractitionerProfilePage(driver);
     }
 
-    public OrderReportPage enter_orderReportPage() {
+    public PractitionerReports enter_orderReportPage() {
         waitElement(orderReport);
         click(orderReport);
         click(orderReportSelect);
-        return new OrderReportPage(driver);
+        return new PractitionerReports(driver);
     }
 
     public LoginPage logout() {

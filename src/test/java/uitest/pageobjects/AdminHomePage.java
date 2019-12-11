@@ -13,7 +13,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import uitest.BasePage;
 import uitest.pageobjects.InventoryPages.ProductCatalog;
-import uitest.pageobjects.Settings.PractitionerApplications;
+import uitest.pageobjects.AdminReports.AdminOrderReportPage;
+import uitest.pageobjects.AdminSettings.PractitionerApplications;
 
 public class AdminHomePage extends BasePage {
     public AdminHomePage(WebDriver driver) {
@@ -48,12 +49,15 @@ public class AdminHomePage extends BasePage {
     // findELements
     @FindBy(xpath = "")
     String notificationList;
+    @FindBy(css = "li:nth-of-type(2) > .ng-star-inserted.site-menu-sub")
+    WebElement list;
 
     public ProductCatalog enter_ProductCatalog() {
         waitElement(inventoryDropdown);
         click(inventoryDropdown);
         waitElement(productCatalog);
         click(productCatalog);
+
         return new ProductCatalog(driver);
     }
 
@@ -84,12 +88,12 @@ public class AdminHomePage extends BasePage {
         return new CouponCodesPage(driver);
     }
 
-    public OrderReportPage enter_ReportPage() {
+    public AdminOrderReportPage enter_ReportPage() {
         waitElement(reports);
         click(reports);
         click(reports);
         click(orderReport);
-        return new OrderReportPage(driver);
+        return new AdminOrderReportPage(driver);
     }
 
     public void access_NotificationsBar() {

@@ -12,28 +12,28 @@ import org.testng.Assert;
 
 import uitest.BasePage;
 
-public class Settings extends BasePage {
-    public Settings(WebDriver driver) {
+public class AdminSettings extends BasePage {
+    public AdminSettings(WebDriver driver) {
         super(driver);
     }
 
     @FindBy(css = "")
     WebElement settings;
 
-    public static class UserList extends Settings {
+    public static class UserList extends AdminSettings {
         public UserList(WebDriver driver) {
             super(driver);
         }
     }
 
-    public static class PractitionerList extends Settings {
+    public static class PractitionerList extends AdminSettings {
         public PractitionerList(WebDriver driver) {
             super(driver);
         }
 
     }
 
-    public static class PractitionerApplications extends Settings {
+    public static class PractitionerApplications extends AdminSettings {
         public PractitionerApplications(WebDriver driver) {
             super(driver);
         }
@@ -91,7 +91,7 @@ public class Settings extends BasePage {
 
     }
 
-    public static class PharmacySettings extends Settings {
+    public static class PharmacySettings extends AdminSettings {
         public PharmacySettings(WebDriver driver) {
             super(driver);
         }
