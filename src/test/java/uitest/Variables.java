@@ -25,7 +25,6 @@ public class Variables {
     public static String patientListBtnEM = "PATIENT LIST";
     public static String escapedString = "×&#10;Successfully updated commissions.";
 
-    public static String succesfulAdjustment = "";
     public static String successfulPatientImport = "You have successfully imported 1 patients";
 
     // Add Patient Info
@@ -46,6 +45,10 @@ public class Variables {
     // Lot Adjustment quantites
     public static String lotQuantity = "12";
 
+    // Adjustments and receivals
+    public static String succesfulAdjustment = StringEscapeUtils
+            .unescapeHtml4("×&#10;Quantities successfully adjusted");
+    public static String succesfulReceival = StringEscapeUtils.unescapeHtml4("Quantities successfully received");
     // Active From
     public static String Active_from_Date = "11/20/2019";
     // Active To

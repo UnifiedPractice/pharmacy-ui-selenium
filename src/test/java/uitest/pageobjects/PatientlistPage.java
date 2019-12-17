@@ -88,6 +88,8 @@ public class PatientlistPage extends BasePage {
     WebElement logDrop;
     @FindBy(css = "li:nth-of-type(2) [role] [role='menuitem']:nth-child(3)")
     WebElement logout;
+    @FindBy(css = ".close > span")
+    WebElement xMark;
 
     public IngredientsPage startOrder() {
         waitElement(startOrder);
@@ -147,10 +149,19 @@ public class PatientlistPage extends BasePage {
     }
 
     public LoginPage logout() {
-        waitElement(logDrop);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         click(logDrop);
         click(logout);
         return new LoginPage(driver);
+    }
+
+    public void closeSentOrder() {
+        waitElement(xMark);
+        click(xMark);
     }
 
     public static class IngredientsPage extends PatientlistPage {

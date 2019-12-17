@@ -33,6 +33,12 @@ public class DispensaryPage extends BasePage {
     @FindBy(css = ".orders-page__title")
     WebElement title;
 
+    @FindBy(xpath = "//div[@id='site-navbar-collapse']/ul[2]//i[@class='material-icons']")
+    WebElement notificationsBar;
+
+    @FindBy(css = ".dx-scrollview-content [role='option']:nth-of-type(1) .badge")
+    WebElement notification1;
+
     public ShippingPage startOrder() {
         waitElement(orderName);
         click(today);
@@ -42,9 +48,18 @@ public class DispensaryPage extends BasePage {
 
             e.printStackTrace();
         }
-        // waitElement(startOrder);
         click(startOrder);
         return new ShippingPage(driver);
+    }
+
+    public void seeNotifications() {
+        waitElement(notificationsBar);
+        click(notificationsBar);
+    }
+
+    public void assertLateOrder() {
+        waitElement(notification1);
+        Assert.assertEquals(readText(notification1), "Late Order");
     }
 
     public void assertTitle() {

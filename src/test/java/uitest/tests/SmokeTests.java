@@ -6,6 +6,8 @@ import org.testng.annotations.Test;
 
 import uitest.TestNgTestBase;
 import uitest.Variables;
+import uitest.databaseConnection.DatabaseConnection;
+import uitest.enums.operationTypeEnum;
 import uitest.pageobjects.AdminHomePage;
 import uitest.pageobjects.AdminSettings;
 import uitest.pageobjects.CommissionsPage;
@@ -20,6 +22,8 @@ import uitest.pageobjects.PractitionerProfilePage;
 import uitest.pageobjects.RegistrationPage;
 
 class SmokeTests extends TestNgTestBase {
+
+    PatientlistPage patientlistPage;
 
     @Test // DONE
     public void placeOrder() throws InterruptedException {
@@ -86,7 +90,7 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(InventoryPages.ProductCatalog.class).selectItem();
         page.GetInstance(InventoryPages.ProductCatalog.class).quantityReceival(Variables.lotQuantity,
                 Variables.expiryDate);
-        page.GetInstance(InventoryPages.ProductCatalog.class).assertChange(Variables.succesfulAdjustment);
+        page.GetInstance(InventoryPages.ProductCatalog.class).assertChange(Variables.succesfulReceival);
     }
 
     @Test // test case to be done with order with coupon applied
@@ -137,7 +141,8 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(PatientlistPage.IngredientsPage.class).roundupIngredients();
         page.GetInstance(PatientlistPage.IngredientsPage.class).checkoutOrder();
         page.GetInstance(PatientlistPage.PlaceOrderPage.class).placeOrder();
-        Thread.sleep(4000);
+        String sqlQuery = "UPDATE [pharmacy].[dispensing].[Orders] SET PlacedOn = DATEADD(hh, - 1, (CURRENT_TIMESTAMP)) WHERE PlacedOn = (SELECT TOP 1 PlacedOn FROM [pharmacy].[dispensing].[Orders] ORDER BY Id DESC)";
+        String actualEmpNameById = DatabaseConnection.executeSQLQuery("QA", sqlQuery, operationTypeEnum.Update);
         page.GetInstance(PatientlistPage.class).get_orderName();
         page.GetInstance(PatientlistPage.class).logout();
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
@@ -162,6 +167,6 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(PractitionerProfilePage.class).changePass_req(Variables.actualPass, Variables.newPass,
                 Variables.confirmPass);
         page.GetInstance(PractitionerProfilePage.class).changePassword();
-
     }
+
 }

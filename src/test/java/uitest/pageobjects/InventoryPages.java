@@ -49,7 +49,7 @@ public class InventoryPages extends BasePage {
         @FindBy(css = ".dx-dropdowneditor.dx-datebox-calendar [aria-haspopup]")
         WebElement expiryDate;
 
-        @FindBy(css = "")
+        @FindBy(css = "//div[@id='toast-container']//div[@role='alertdialog']")
         WebElement toastMessage;
 
         public void startAdjust() {
@@ -100,7 +100,7 @@ public class InventoryPages extends BasePage {
         }
 
         public void assertChange(String expectedText) {
-            waitElement(toastMessage);
+            // waitElement(toastMessage);
             Assert.assertEquals(readText(toastMessage), expectedText);
         }
 
