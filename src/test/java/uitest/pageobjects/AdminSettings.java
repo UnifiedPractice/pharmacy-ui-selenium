@@ -2,12 +2,9 @@
 
 package uitest.pageobjects;
 
-import java.util.List;
-
-import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.*;
 import org.testng.Assert;
 
 import uitest.BasePage;
@@ -19,6 +16,26 @@ public class AdminSettings extends BasePage {
 
     @FindBy(css = "")
     WebElement settings;
+
+    public UserList enter_UserList() {
+
+        return new UserList(driver);
+    }
+
+    public PractitionerList enter_PractitionerList() {
+
+        return new PractitionerList(driver);
+    }
+
+    public AdminSettings enter_PractitionerApplications() {
+
+        return new AdminSettings(driver);
+    }
+
+    public PharmacySettings enter_PharmacySettings() {
+
+        return new PharmacySettings(driver);
+    }
 
     public static class UserList extends AdminSettings {
         public UserList(WebDriver driver) {

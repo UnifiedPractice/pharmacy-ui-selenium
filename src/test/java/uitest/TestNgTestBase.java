@@ -143,6 +143,7 @@ public class TestNgTestBase {
         drivers.put(method.getName(), driver);
         page = new PageGenerator(driver);
         driver.manage().window().maximize();
+        driver.manage().deleteAllCookies();
         driver.get(Variables.helioUrl);
 
     }

@@ -23,10 +23,8 @@ public class CommissionsPage extends BasePage {
     WebElement setBulk;
 
     // Modal
-    @FindBy(css = "dx-data-grid#byMediums > div[role='grid']  .dx-datagrid-content > table[role='presentation'] > tbody > tr:nth-of-type(3) > td:nth-of-type(2)")
-    WebElement powder;
-    @FindBy(css = "td:nth-of-type(2) input[role='spinbutton']")
-    WebElement powderInput;
+    @FindBy(css = ".dx-numberbox [type='text']")
+    WebElement allItems;
     @FindBy(css = ".modal-footer .dx-button-text")
     WebElement applyBulk;
 
@@ -45,11 +43,14 @@ public class CommissionsPage extends BasePage {
     public void set_Commission() {
         waitElement(lastElement);
         click(setBulk);
-        waitElement(powder);
-        click(powder);
-        waitElement(powderInput);
-        writeText(powderInput, "5");
+        waitElement(allItems);
+        writeText(allItems, "5");
         click(byCategories);
+        try {
+            Thread.sleep(2500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         click(applyBulk);
     }
 

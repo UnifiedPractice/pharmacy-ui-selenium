@@ -40,26 +40,17 @@ public class AdminHomePage extends BasePage {
     // Reports
     @FindBy(css = ".site-menu .ng-star-inserted:nth-of-type(5) .material-icons.ng-star-inserted")
     WebElement reports;
-    @FindBy(css = ".site-menu .ng-star-inserted:nth-of-type(5) .material-icons.ng-star-inserted")
+    @FindBy(xpath = "/html/body/up-root/up-container/up-sidebar/div/div[1]/div/div/ul/li[5]/ul/li[2]/up-sidebar-item/a/span")
     WebElement orderReport;
 
     // Notifications
     @FindBy(css = "[class='nav-item ng-tns-c3-0 ng-star-inserted'] .nav-link")
     WebElement notifications;
-    // findELements
+    // findELementss
     @FindBy(xpath = "")
     String notificationList;
     @FindBy(css = "li:nth-of-type(2) > .ng-star-inserted.site-menu-sub")
     WebElement list;
-
-    public ProductCatalog enter_ProductCatalog() {
-        waitElement(inventoryDropdown);
-        click(inventoryDropdown);
-        waitElement(productCatalog);
-        click(productCatalog);
-
-        return new ProductCatalog(driver);
-    }
 
     public PractitionerApplications enter_PractitionerApplications() {
         try {
@@ -89,8 +80,12 @@ public class AdminHomePage extends BasePage {
     }
 
     public AdminOrderReportPage enter_ReportPage() {
-        waitElement(reports);
-        click(reports);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+
+            e.printStackTrace();
+        }
         click(reports);
         click(orderReport);
         return new AdminOrderReportPage(driver);

@@ -32,7 +32,7 @@ public class Variables {
     public static String lastName = UUID.randomUUID().toString();
     public static String dObOption = "3/03/1999";
     public static String phoneNumber = "+40728312211";
-    public static String emailAddress = "test.test@test.com";
+    public static String emailAddress = "claudiu.maxiim@omnisourcetech.com";
     public static String address1 = "Checkout Street 1";
     public static String city = "Colorado";
     public static String zipCode = "000000";
@@ -46,9 +46,8 @@ public class Variables {
     public static String lotQuantity = "12";
 
     // Adjustments and receivals
-    public static String succesfulAdjustment = StringEscapeUtils
-            .unescapeHtml4("×&#10;Quantities successfully adjusted");
-    public static String succesfulReceival = StringEscapeUtils.unescapeHtml4("Quantities successfully received");
+    public static String succesfulAdjustment = "Quantities successfully adjusted";
+    public static String succesfulReceival = "Quantities successfully received";
     // Active From
     public static String Active_from_Date = "11/20/2019";
     // Active To

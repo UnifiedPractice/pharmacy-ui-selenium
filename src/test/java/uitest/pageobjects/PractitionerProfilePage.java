@@ -58,8 +58,8 @@ public class PractitionerProfilePage extends BasePage {
 
     //
     String filePath = "src/test/java/uitest/uploadDocuments/chart.pdf";
-    @FindBy(css = "")
-    WebElement notif;
+    @FindBy(css = ".toast-message")
+    WebElement successMessage;
 
     public void changePass_req(String oldPass, String newPass, String confirmPass) {
         waitElement(changePass);
@@ -107,7 +107,12 @@ public class PractitionerProfilePage extends BasePage {
     }
 
     public void assert_PassChange(String expected) {
-        Assert.assertEquals(readText(notif), expected);
+        Assert.assertEquals(readText(""), expected);
+    }
+
+    public void assert_CertificateUpload(String expected) throws InterruptedException {
+        waitElement(successMessage);
+        Assert.assertEquals(readText(successMessage), expected);
     }
 
 }

@@ -2,30 +2,14 @@
 
 package uitest.databaseConnection;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
-import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.*;
-
-import uitest.TestNgTestBase;
 import uitest.enums.operationTypeEnum;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-import java.sql.*;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 
 public class DatabaseConnection {
     // Connection object
@@ -112,7 +96,7 @@ public class DatabaseConnection {
                 System.out.println("SQL Query:" + sqlQuery);
 
                 updatedRows = stmt.executeUpdate(sqlQuery);
-               // System.out.println("Number of commits: " + updatedRows);
+                // System.out.println("Number of commits: " + updatedRows);
                 stmt.close();
                 System.out.println("Update: Successful");
                 connection.commit();

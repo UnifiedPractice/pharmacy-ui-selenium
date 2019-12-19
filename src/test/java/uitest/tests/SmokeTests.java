@@ -63,7 +63,7 @@ class SmokeTests extends TestNgTestBase {
     public void adjustAdd_inventory() {
         page.GetInstance(LoginPage.class).openHelioscript();
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
-        page.GetInstance(AdminHomePage.class).enter_ProductCatalog();
+        page.GetInstance(InventoryPages.class).enter_ProductCatalog();
         page.GetInstance(InventoryPages.ProductCatalog.class).startAdjust();
         page.GetInstance(InventoryPages.ProductCatalog.class).selectItem();
         page.GetInstance(InventoryPages.ProductCatalog.class).quantityAddition(Variables.lotQuantity);
@@ -74,7 +74,7 @@ class SmokeTests extends TestNgTestBase {
     public void adjustRemove_inventory() {
         page.GetInstance(LoginPage.class).openHelioscript();
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
-        page.GetInstance(AdminHomePage.class).enter_ProductCatalog();
+        page.GetInstance(InventoryPages.class).enter_ProductCatalog();
         page.GetInstance(InventoryPages.ProductCatalog.class).startAdjust();
         page.GetInstance(InventoryPages.ProductCatalog.class).selectItem();
         page.GetInstance(InventoryPages.ProductCatalog.class).quantityRemoval(Variables.lotQuantity);
@@ -85,7 +85,7 @@ class SmokeTests extends TestNgTestBase {
     public void receive_inventory() {
         page.GetInstance(LoginPage.class).openHelioscript();
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
-        page.GetInstance(AdminHomePage.class).enter_ProductCatalog();
+        page.GetInstance(InventoryPages.class).enter_ProductCatalog();
         page.GetInstance(InventoryPages.ProductCatalog.class).startReceive();
         page.GetInstance(InventoryPages.ProductCatalog.class).selectItem();
         page.GetInstance(InventoryPages.ProductCatalog.class).quantityReceival(Variables.lotQuantity,
@@ -132,23 +132,6 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(RegistrationPage.class).submitApplication();
     }
 
-    @Test // not done
-    public void assert_LateOrder() throws InterruptedException {
-        page.GetInstance(LoginPage.class).openHelioscript();
-        page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.actualPass);
-        page.GetInstance(PatientlistPage.class).startOrder();
-        page.GetInstance(PatientlistPage.IngredientsPage.class).addIngredients();
-        page.GetInstance(PatientlistPage.IngredientsPage.class).roundupIngredients();
-        page.GetInstance(PatientlistPage.IngredientsPage.class).checkoutOrder();
-        page.GetInstance(PatientlistPage.PlaceOrderPage.class).placeOrder();
-        String sqlQuery = "UPDATE [pharmacy].[dispensing].[Orders] SET PlacedOn = DATEADD(hh, - 1, (CURRENT_TIMESTAMP)) WHERE PlacedOn = (SELECT TOP 1 PlacedOn FROM [pharmacy].[dispensing].[Orders] ORDER BY Id DESC)";
-        String actualEmpNameById = DatabaseConnection.executeSQLQuery("QA", sqlQuery, operationTypeEnum.Update);
-        page.GetInstance(PatientlistPage.class).get_orderName();
-        page.GetInstance(PatientlistPage.class).logout();
-        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
-        // page.GetInstance(AdminHomePage.class).
-    }
-
     @Test
     public void practitioner_RegistrationApproval() throws InterruptedException {
         page.GetInstance(LoginPage.class).openHelioscript();
@@ -169,4 +152,22 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(PractitionerProfilePage.class).changePassword();
     }
 
+    @Test
+    public void import_ChineseNames() throws InterruptedException {
+        page.GetInstance(LoginPage.class).openHelioscript();
+        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
+        page.GetInstance(InventoryPages.class).enter_ProductCatalog();
+        page.GetInstance(InventoryPages.ProductCatalog.class).uploadFile(Variables.uploadJS);
+        page.GetInstance(InventoryPages.ProductCatalog.class)
+                .assertImport("You have successfully imported the names for 0 products.");
+    }
+
+    @Test
+    public void thresholdReport() {
+        page.GetInstance(LoginPage.class).openHelioscript();
+        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
+        page.GetInstance(InventoryPages.class).enter_ThresholdReport();
+        page.GetInstance(InventoryPages.ThresholdReport.class).generateExportList();
+        page.GetInstance(InventoryPages.ThresholdReport.class).assertDownload("Threshold Report.csv");
+    }
 }

@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import uitest.BasePage;
 import uitest.Variables;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 import org.openqa.selenium.JavascriptExecutor;
 
 public class RegistrationPage extends BasePage {
@@ -15,6 +16,7 @@ public class RegistrationPage extends BasePage {
         super(driver);
     }
 
+    // Practitioner Information
     @FindBy(xpath = "//up-root/up-practitioner-registration/div[@class='user-page-full']/div[@class='practitioner-register']/div/div[3]/div[1]/form/ufc-form-render[1]/div[1]/div[@class='c-user-box']/div[@class='user-box__item']/dx-text-box//input[@role='textbox']")
     WebElement firstName;
     @FindBy(xpath = "//up-root/up-practitioner-registration/div[@class='user-page-full']/div[@class='practitioner-register']/div/div[3]/div[1]/form/ufc-form-render[1]/div[2]/div[@class='c-user-box']/div[@class='user-box__item']/dx-text-box//input[@role='textbox']")
@@ -62,8 +64,12 @@ public class RegistrationPage extends BasePage {
     WebElement submit;
     @FindBy(xpath = "//up-root/up-practitioner-registration/div[@class='user-page-full']/div[@class='practitioner-register']/div/div[3]/div[1]/form/ufc-form-render[2]/div[1]/div[@class='c-user-box']/div[@class='user-box__item']/dx-text-box//input[@role='textbox']")
     WebElement address;
-
+    // Path to
     String filePath = "C:/Users/Andrew/Downloads/superbill.pdf";
+
+    // Application submitted
+    @FindBy(css = ".modal h4")
+    WebElement successMessage;
 
     public void writeCredentials() throws InterruptedException {
 
@@ -112,6 +118,11 @@ public class RegistrationPage extends BasePage {
     public void submitApplication() throws InterruptedException {
         Thread.sleep(1000);
         click(submit);
+    }
+
+    public void assert_ApplicationSub(String expected) {
+        waitElement(successMessage);
+        Assert.assertEquals(readText(successMessage), expected);
     }
 
 }
