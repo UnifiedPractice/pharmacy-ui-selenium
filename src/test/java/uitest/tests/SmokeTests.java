@@ -6,8 +6,6 @@ import org.testng.annotations.Test;
 
 import uitest.TestNgTestBase;
 import uitest.Variables;
-import uitest.databaseConnection.DatabaseConnection;
-import uitest.enums.operationTypeEnum;
 import uitest.pageobjects.AdminHomePage;
 import uitest.pageobjects.AdminSettings;
 import uitest.pageobjects.CommissionsPage;
@@ -102,7 +100,7 @@ class SmokeTests extends TestNgTestBase {
                 Variables.Active_toDate, "3");
     }
 
-    @Test // done
+    @Test // dones
     public void patient_import() throws InterruptedException {
         page.GetInstance(LoginPage.class).openHelioscript();
         page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.actualPass);
@@ -169,5 +167,14 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(InventoryPages.class).enter_ThresholdReport();
         page.GetInstance(InventoryPages.ThresholdReport.class).generateExportList();
         page.GetInstance(InventoryPages.ThresholdReport.class).assertDownload("Threshold Report.csv");
+    }
+
+    @Test
+    public void expired_LotNumber() {
+        page.GetInstance(LoginPage.class).openHelioscript();
+        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
+        page.GetInstance(InventoryPages.class).enter_ExpiredLotNumber();
+        page.GetInstance(InventoryPages.ExpiredLotNumber.class).exportFile();
+        page.GetInstance(InventoryPages.ExpiredLotNumber.class).assertExport("Expired_lot_report_12_19_2019");
     }
 }

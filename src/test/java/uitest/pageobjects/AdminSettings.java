@@ -13,7 +13,7 @@ public class AdminSettings extends BasePage {
     public AdminSettings(WebDriver driver) {
         super(driver);
     }
-
+    //sd
     @FindBy(css = "")
     WebElement settings;
 

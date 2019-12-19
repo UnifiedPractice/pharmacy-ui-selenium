@@ -46,6 +46,14 @@ public class InventoryPages extends BasePage {
         return new ThresholdReport(driver);
     }
 
+    public ExpiredLotNumber enter_ExpiredLotNumber() {
+        waitElement(inventory);
+        click(inventory);
+        waitElement(inventory);
+        click(inventory);
+        return new ExpiredLotNumber(driver);
+    }
+
     public static class ProductCatalog extends InventoryPages {
 
         public ProductCatalog(WebDriver driver) {
@@ -175,10 +183,14 @@ public class InventoryPages extends BasePage {
         WebElement language;
         @FindBy(xpath = "//body/up-root/up-container[@class='ng-star-inserted']/div[@class='page']/ufc-threshold-report-page[@class='ng-star-inserted']//dx-button[@role='button']//span[@class='dx-button-text']")
         WebElement generateList;
-        @FindBy(xpath = "//up-root/up-container[@class='ng-star-inserted']//ufc-threshold-report-page[@class='ng-star-inserted']//dx-data-grid[@role='presentation']/div[@role='grid']/div[6]//table[@role='presentation']/tbody[@role='presentation']/tr[1]/td[10]//input[@role='spinbutton']")
+        @FindBy(xpath = "//up-root/up-container[@class='ng-star-inserted']//ufc-threshold-report-page[@class='ng-star-inserted']//dx-data-grid[@role='presentation']/div[@role='grid']/div[6]//table[@role='presentation']/tbody/tr[1]/td[10]")
         WebElement requestedQ1;
+        @FindBy(xpath = "//up-root/up-container[@class='ng-star-inserted']//ufc-threshold-report-page[@class='ng-star-inserted']//dx-data-grid[@role='presentation']/div[@role='grid']/div[6]//table[@role='presentation']/tbody[@role='presentation']/tr[1]/td[10]//input[@role='spinbutton']")
+        WebElement requestedQ1Input;
         @FindBy(xpath = "//up-root/up-container[@class='ng-star-inserted']//ufc-threshold-report-page[@class='ng-star-inserted']//dx-data-grid[@role='presentation']/div[@role='grid']/div[6]//table[@role='presentation']/tbody/tr[2]/td[10]")
         WebElement requestedQ2;
+        @FindBy(xpath = "//up-root/up-container[@class='ng-star-inserted']//ufc-threshold-report-page[@class='ng-star-inserted']//dx-data-grid[@role='presentation']/div[@role='grid']/div[6]//table[@role='presentation']/tbody[@role='presentation']/tr[2]/td[10]//input[@role='spinbutton']")
+        WebElement requestedQ2Input;
 
         // PopUp buttons
         @FindBy(xpath = "//body/ufc-threshold-items-modal/div/div[@class='modal-dialog threshold-items-modal-dialog']//dx-button[@role='button']//span[@class='dx-button-text']")
@@ -192,8 +204,15 @@ public class InventoryPages extends BasePage {
             } catch (InterruptedException e1) {
                 e1.printStackTrace();
             }
-            writeText(requestedQ1, "123");
-            writeText(requestedQ2, "123");
+            click(requestedQ1Input);
+            try {
+                Thread.sleep(2500);
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
+            }
+            writeText(requestedQ1Input, "123");
+            click(requestedQ2);
+            writeText(requestedQ2Input, "123");
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -224,6 +243,25 @@ public class InventoryPages extends BasePage {
     public static class ExpiredLotNumber extends InventoryPages {
         public ExpiredLotNumber(WebDriver driver) {
             super(driver);
+        }
+
+        @FindBy(css = "[class='col-sm-6  col-xs-12  text-right  expired-lot-report__export'] span")
+        WebElement exportCSV;
+        @FindBy(css = "input[role='textbox']")
+        WebElement searchBar;
+
+        public void exportFile() {
+            waitElement(exportCSV);
+            click(exportCSV);
+            try {
+                Thread.sleep(1500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        public void assertExport(String fileName) {
+            assertDownload(fileName);
         }
     }
 
