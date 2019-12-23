@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import uitest.TestNgTestBase;
 import uitest.Variables;
 import uitest.pageobjects.AdminHomePage;
+import uitest.pageobjects.AdminReports;
 import uitest.pageobjects.AdminSettings;
 import uitest.pageobjects.CommissionsPage;
 import uitest.pageobjects.CouponCodesPage;
@@ -68,7 +69,7 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(InventoryPages.ProductCatalog.class).assertChange(Variables.succesfulAdjustment);
     }
 
-    @Test // done - pending toast messages
+    @Test // done - pending toast messagess
     public void adjustRemove_inventory() {
         page.GetInstance(LoginPage.class).openHelioscript();
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
@@ -157,7 +158,7 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(InventoryPages.class).enter_ProductCatalog();
         page.GetInstance(InventoryPages.ProductCatalog.class).uploadFile(Variables.uploadJS);
         page.GetInstance(InventoryPages.ProductCatalog.class)
-                .assertImport("You have successfully imported the names for 0 products.");
+                .assertImport("You have successfully imported the names for 2 products.");
     }
 
     @Test
@@ -175,6 +176,24 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
         page.GetInstance(InventoryPages.class).enter_ExpiredLotNumber();
         page.GetInstance(InventoryPages.ExpiredLotNumber.class).exportFile();
-        page.GetInstance(InventoryPages.ExpiredLotNumber.class).assertExport("Expired_lot_report_12_19_2019");
+        page.GetInstance(InventoryPages.ExpiredLotNumber.class).assertExport("Expired_lot_report_12_20_2019.csv");
+    }
+
+    @Test
+    public void medium_Management() {
+        page.GetInstance(LoginPage.class).openHelioscript();
+        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
+        page.GetInstance(InventoryPages.class).enter_MediumManagement();
+        page.GetInstance(InventoryPages.MediumManagement.class).addMedium();
+        page.GetInstance(InventoryPages.MediumManagement.class).assertMedium();
+    }
+
+    @Test//done
+    public void lotNumber_RecallReport() {
+        page.GetInstance(LoginPage.class).openHelioscript();
+        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
+        page.GetInstance(AdminReports.class).enter_LotNumberRecallReportPage();
+        page.GetInstance(AdminReports.LotNumberRecallReport.class).exportCSV();
+        page.GetInstance(AdminReports.LotNumberRecallReport.class).assertExport("Lot_Number_Recall_Report.csv");
     }
 }

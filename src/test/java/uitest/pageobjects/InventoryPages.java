@@ -46,11 +46,19 @@ public class InventoryPages extends BasePage {
         return new ThresholdReport(driver);
     }
 
+    public MediumManagement enter_MediumManagement() {
+        waitElement(inventory);
+        click(inventory);
+        waitElement(medium);
+        click(medium);
+        return new MediumManagement(driver);
+    }
+
     public ExpiredLotNumber enter_ExpiredLotNumber() {
         waitElement(inventory);
         click(inventory);
-        waitElement(inventory);
-        click(inventory);
+        waitElement(lotNrReport);
+        click(lotNrReport);
         return new ExpiredLotNumber(driver);
     }
 
@@ -237,6 +245,59 @@ public class InventoryPages extends BasePage {
     public static class MediumManagement extends InventoryPages {
         public MediumManagement(WebDriver driver) {
             super(driver);
+        }
+
+        // Available buttons
+        @FindBy(css = "[class='col-xl-6  col-lg-12 medium-management__grid-title'] .dx-button-text")
+        WebElement addMedium;
+        @FindBy(css = ".col-12.page-footer > dx-button[role='button']  .dx-button-text")
+        WebElement save;
+        @FindBy(css = "input")
+        WebElement addedMedium;
+
+        // Notification
+        @FindBy(css = ".toast-message")
+        WebElement successNotification;
+
+        public void addMedium() {
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            // waitElement(addMedium);
+            click(addMedium);
+            // waitElement(addedMedium);
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            click(addedMedium);
+            writeText(addedMedium, "MediumTest");
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            click("[role] [role='presentation']:nth-of-type(5) tbody [role='presentation']");
+            // JavascriptExecutor js = (JavascriptExecutor) driver;
+            // js.executeScript("arguments[0].removeAttribute('disabled','disabled')",
+            // save);
+            try {
+                Thread.sleep(2500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            click(save);
+        }
+
+        public void assertMedium() {
+            waitElement(successNotification);
+            Assert.assertEquals(readText(successNotification), "Medium saved successfully");
         }
     }
 

@@ -14,10 +14,30 @@ public class AdminReports extends BasePage {
     }
 
     // s
-    @FindBy(css = ".site-menu-icon.ng-star-inserted")
+    @FindBy(css = "li:nth-of-type(5)  .material-icons.ng-star-inserted.site-menu-icon.sub-indicator")
     WebElement reportsDropdown;
     @FindBy(css = ".site-menu-sub-item.ng-star-inserted .site-menu-title")
     WebElement orderReport;
+    @FindBy(css = ".site-menu li:nth-of-type(5) .ng-star-inserted:nth-of-type(3) .site-menu-title")
+    WebElement lotNrRecall;
+
+    public AdminOrderReportPage enter_OrderReportPage() {
+
+        return new AdminOrderReportPage(driver);
+    }
+
+    public LotNumberRecallReport enter_LotNumberRecallReportPage() {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        click(reportsDropdown);
+        waitElement(lotNrRecall);
+        click(lotNrRecall);
+        return new LotNumberRecallReport(driver);
+    }
 
     public static class AdminOrderReportPage extends AdminReports {
         public AdminOrderReportPage(WebDriver driver) {
@@ -45,4 +65,24 @@ public class AdminReports extends BasePage {
         }
 
     }
+
+    public static class LotNumberRecallReport extends AdminReports {
+        public LotNumberRecallReport(WebDriver driver) {
+            super(driver);
+        }
+
+        @FindBy(css = ".col-sm-6.col-xs-12.lot-number-recall-report__export.text-right > a > span")
+        WebElement exportCSV;
+
+        public void exportCSV() {
+            waitElement(exportCSV);
+            click(exportCSV);
+        }
+
+        public void assertExport(String fileName) {
+            assertDownload(fileName);
+        }
+
+    }
+
 }

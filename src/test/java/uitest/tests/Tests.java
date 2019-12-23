@@ -16,7 +16,7 @@ class Tests extends TestNgTestBase {
     public void ValidCredentials() {
 
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
-        // page.GetInstance(DashboardPage.class).verifyLogin(Variables.patientListBtn);
+        // pagee.GetInstance(DashboardPage.class).verifyLogin(Variables.patientListBtn);
 
     }
 
