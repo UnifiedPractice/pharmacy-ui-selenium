@@ -6,6 +6,8 @@ import org.testng.annotations.Test;
 
 import uitest.TestNgTestBase;
 import uitest.Variables;
+import uitest.databaseConnection.DatabaseConnection;
+import uitest.enums.operationTypeEnum;
 import uitest.pageobjects.AdminHomePage;
 import uitest.pageobjects.AdminReports;
 import uitest.pageobjects.AdminSettings;
@@ -25,31 +27,6 @@ class SmokeTests extends TestNgTestBase {
     PatientlistPage patientlistPage;
 
     @Test // DONE
-    public void placeOrder() throws InterruptedException {
-        page.GetInstance(LoginPage.class).openHelioscript();
-        page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.actualPass);
-        page.GetInstance(PatientlistPage.class).startOrder();
-        page.GetInstance(PatientlistPage.IngredientsPage.class).addIngredients();
-        page.GetInstance(PatientlistPage.IngredientsPage.class).roundupIngredients();
-        page.GetInstance(PatientlistPage.IngredientsPage.class).checkoutOrder();
-        page.GetInstance(PatientlistPage.PlaceOrderPage.class).placeOrder();
-        page.GetInstance(PatientlistPage.class).get_orderName();
-        page.GetInstance(PatientlistPage.class).assertOrder(Variables.orderSent);
-    }
-
-    @Test // DONE
-    public void shipOrder() throws InterruptedException {
-        page.GetInstance(LoginPage.class).openHelioscript();
-        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
-        page.GetInstance(AdminHomePage.class).enter_Dispensary();
-        page.GetInstance(DispensaryPage.class).startOrder();
-        page.GetInstance(DispensaryPage.ShippingPage.class).select_item();
-        page.GetInstance(DispensaryPage.ShippingPage.class).completeQuantities();
-        page.GetInstance(DispensaryPage.ShippingPage.class).shipOrder();
-        page.GetInstance(DispensaryPage.class).assertTitle();
-    }
-
-    @Test // DONE
     public void setCommission() throws InterruptedException {
         page.GetInstance(LoginPage.class).openHelioscript();
         page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.actualPass);
@@ -58,7 +35,7 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(CommissionsPage.class).assert_Commission();
     }
 
-    @Test // done
+    @Test // donee
     public void adjustAdd_inventory() {
         page.GetInstance(LoginPage.class).openHelioscript();
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
@@ -151,7 +128,7 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(PractitionerProfilePage.class).changePassword();
     }
 
-    @Test
+    @Test // done
     public void import_ChineseNames() throws InterruptedException {
         page.GetInstance(LoginPage.class).openHelioscript();
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
@@ -161,7 +138,7 @@ class SmokeTests extends TestNgTestBase {
                 .assertImport("You have successfully imported the names for 2 products.");
     }
 
-    @Test
+    @Test // pending implementation
     public void thresholdReport() {
         page.GetInstance(LoginPage.class).openHelioscript();
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
@@ -170,7 +147,7 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(InventoryPages.ThresholdReport.class).assertDownload("Threshold Report.csv");
     }
 
-    @Test
+    @Test // done
     public void expired_LotNumber() {
         page.GetInstance(LoginPage.class).openHelioscript();
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
@@ -179,7 +156,7 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(InventoryPages.ExpiredLotNumber.class).assertExport("Expired_lot_report_12_20_2019.csv");
     }
 
-    @Test
+    @Test // not done(not able to type-out in input)
     public void medium_Management() {
         page.GetInstance(LoginPage.class).openHelioscript();
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
@@ -188,12 +165,35 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(InventoryPages.MediumManagement.class).assertMedium();
     }
 
-    @Test//done
-    public void lotNumber_RecallReport() {
+    @Test // done
+    public void lotNumber_RecallReport() throws InterruptedException {
         page.GetInstance(LoginPage.class).openHelioscript();
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
         page.GetInstance(AdminReports.class).enter_LotNumberRecallReportPage();
         page.GetInstance(AdminReports.LotNumberRecallReport.class).exportCSV();
         page.GetInstance(AdminReports.LotNumberRecallReport.class).assertExport("Lot_Number_Recall_Report.csv");
+    }
+
+    @Test // done
+    public void InvalidCredentials() {
+        page.GetInstance(LoginPage.class).login(Variables.invalidUser, Variables.invalidPass);
+        page.GetInstance(LoginPage.class).verify_invalidUser();
+    }
+
+    @Test
+    public void AddNewPatient() throws InterruptedException {
+        page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.actualPass);
+        page.GetInstance(PatientlistPage.class).addPatient();
+    }
+
+    @Test
+    public void orderHour() {
+        String sqlQuery = "UPDATE [pharmacy].[dispensing].[Orders] SET PlacedOn = DATEADD(hh, - 1, (CURRENT_TIMESTAMP)) WHERE PlacedOn = (SELECT TOP 1 PlacedOn FROM [pharmacy].[dispensing].[Orders] ORDER BY Id DESC)";
+        // String expectedEmpName = "Melissa";
+        // Getting employee name by Id
+        String actualEmpNameById = DatabaseConnection.executeSQLQuery("QA", sqlQuery, operationTypeEnum.Update);
+        // System.out.println("Employee name retrieved from database :" +
+        // actualEmpNameById);
+        // Assert.assertEquals(actualEmpNameById, expectedEmpName);
     }
 }

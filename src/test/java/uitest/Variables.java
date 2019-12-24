@@ -20,7 +20,7 @@ public class Variables {
     public static String confirmPass = "Test123!";
 
     // Error messages
-    public static String loginEM = "info The username/password couple is invalid.";
+    public static String loginEM = "The username/password couple is invalid.";
     public static String orderSent = "ORDER SENT";
     public static String patientListBtnEM = "PATIENT LIST";
     public static String escapedString = "×&#10;Successfully updated commissions.";

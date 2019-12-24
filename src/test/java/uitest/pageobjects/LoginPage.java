@@ -25,7 +25,7 @@ public class LoginPage extends BasePage {
     @FindBy(css = "form [class='col-12 form-row']:nth-of-type(3) .c-user-box")
     WebElement loginButton;
 
-    @FindBy(css = "up-login-box .row:nth-child(2) div")
+    @FindBy(css = ".error")
     WebElement credentialError;
     // New Account Registration
     @FindBy(css = "[tabindex='5']")

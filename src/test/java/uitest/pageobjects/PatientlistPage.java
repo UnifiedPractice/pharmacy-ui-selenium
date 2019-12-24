@@ -254,6 +254,12 @@ public class PatientlistPage extends BasePage {
         @FindBy(css = "[data-bind] [role='option']:nth-of-type(1) .dx-list-item-content")
         WebElement stateSelection;
 
+        // Coupon input
+        @FindBy(css = "input[role='textbox']")
+        WebElement couponInput;
+        @FindBy(css = ".apply-coupon__butcontainer .dx-button-text")
+        WebElement applyCoupon;
+
         public void placeOrder() {
             waitElement(sendOrder);
             click(yesDropship);
@@ -282,6 +288,21 @@ public class PatientlistPage extends BasePage {
             click(clinicPay);
             click(termsAgreement);
             click(sendOrder);
+        }
+
+        public void apply_coupon() {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            writeText(couponInput, "SUN10");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            click(applyCoupon);
         }
     }
 

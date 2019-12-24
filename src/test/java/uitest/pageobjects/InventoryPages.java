@@ -259,7 +259,7 @@ public class InventoryPages extends BasePage {
         @FindBy(css = ".toast-message")
         WebElement successNotification;
 
-        public void addMedium() {
+        public void addMedium() { //pending implementation
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException e1) {
