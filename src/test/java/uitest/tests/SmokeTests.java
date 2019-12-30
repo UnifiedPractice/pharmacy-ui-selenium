@@ -13,7 +13,6 @@ import uitest.pageobjects.AdminReports;
 import uitest.pageobjects.AdminSettings;
 import uitest.pageobjects.CommissionsPage;
 import uitest.pageobjects.CouponCodesPage;
-import uitest.pageobjects.DispensaryPage;
 import uitest.pageobjects.InventoryPages;
 import uitest.pageobjects.LoginPage;
 import uitest.pageobjects.PatientimportPage;
@@ -181,7 +180,7 @@ class SmokeTests extends TestNgTestBase {
     }
 
     @Test
-    public void AddNewPatient() throws InterruptedException {
+    public void addNewPatient() throws InterruptedException {
         page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.actualPass);
         page.GetInstance(PatientlistPage.class).addPatient();
     }
@@ -195,5 +194,41 @@ class SmokeTests extends TestNgTestBase {
         // System.out.println("Employee name retrieved from database :" +
         // actualEmpNameById);
         // Assert.assertEquals(actualEmpNameById, expectedEmpName);
+    }
+
+    @Test // done
+    public void terms_and_conditions() throws InterruptedException {
+        page.GetInstance(LoginPage.class).openHelioscript();
+        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
+        page.GetInstance(AdminSettings.class).enter_PharmacySettings();
+        Thread.sleep(3000);
+        // page.GetInstance(AdminSettings.PharmacySettings.class).enter_GeneralTab();
+        page.GetInstance(AdminSettings.PharmacySettings.GeneralTab.class).uploadTerms(Variables.uploadJS);
+        page.GetInstance(AdminSettings.PharmacySettings.GeneralTab.class).saveChanges();
+        page.GetInstance(AdminSettings.PharmacySettings.GeneralTab.class).assertUploads("Settings saved successfully");
+    }
+
+    @Test // done
+    public void general_LogoUpload() throws InterruptedException {
+        page.GetInstance(LoginPage.class).openHelioscript();
+        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
+        page.GetInstance(AdminSettings.class).enter_PharmacySettings();
+        Thread.sleep(3000);
+        // page.GetInstance(AdminSettings.PharmacySettings.class).enter_GeneralTab();
+        page.GetInstance(AdminSettings.PharmacySettings.GeneralTab.class).uploadLogo(Variables.uploadJS);
+        page.GetInstance(AdminSettings.PharmacySettings.GeneralTab.class).saveChanges();
+        page.GetInstance(AdminSettings.PharmacySettings.GeneralTab.class).assertUploads("Settings saved successfully");
+    }
+
+    @Test // done
+    public void shipping_method() {
+        page.GetInstance(LoginPage.class).openHelioscript();
+        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
+        page.GetInstance(AdminSettings.class).enter_PharmacySettings();
+        page.GetInstance(AdminSettings.PharmacySettings.class).enter_ShippingPaymentTab();
+        page.GetInstance(AdminSettings.PharmacySettings.ShippingPaymentTab.class).addShippingMethod();
+        page.GetInstance(AdminSettings.PharmacySettings.ShippingPaymentTab.class).saveChanges();
+        page.GetInstance(AdminSettings.PharmacySettings.ShippingPaymentTab.class)
+                .assertChanges("Settings saved successfully");
     }
 }

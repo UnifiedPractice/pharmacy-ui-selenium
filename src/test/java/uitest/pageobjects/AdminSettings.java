@@ -7,15 +7,29 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
+import java.io.File;
+
+import org.openqa.selenium.JavascriptExecutor;
+
 import uitest.BasePage;
 
 public class AdminSettings extends BasePage {
     public AdminSettings(WebDriver driver) {
         super(driver);
     }
-    //sd
-    @FindBy(css = "")
+
+    // Settings + under settings menu
+    @FindBy(css = "li:nth-of-type(3)  .material-icons.ng-star-inserted.site-menu-icon.sub-indicator")
     WebElement settings;
+
+    @FindBy(css = ".site-menu li:nth-of-type(3) .ng-star-inserted:nth-of-type(2) .site-menu-title")
+    WebElement userList;
+    @FindBy(css = ".site-menu li:nth-of-type(3) .ng-star-inserted:nth-of-type(3) .site-menu-title")
+    WebElement practitionerList;
+    @FindBy(css = ".site-menu li:nth-of-type(3) .ng-star-inserted:nth-of-type(4) .site-menu-title")
+    WebElement practitionerApplications;
+    @FindBy(css = "li:nth-of-type(3) > .ng-star-inserted.site-menu-sub > li:nth-of-type(5) > .ng-star-inserted  .site-menu-title")
+    WebElement pharmacySettings;
 
     public UserList enter_UserList() {
 
@@ -33,7 +47,8 @@ public class AdminSettings extends BasePage {
     }
 
     public PharmacySettings enter_PharmacySettings() {
-
+        waitElement(pharmacySettings);
+        click(pharmacySettings);
         return new PharmacySettings(driver);
     }
 
@@ -111,6 +126,236 @@ public class AdminSettings extends BasePage {
     public static class PharmacySettings extends AdminSettings {
         public PharmacySettings(WebDriver driver) {
             super(driver);
+        }
+
+        // Main Pharmacy Settings tab
+        @FindBy(css = "div[role='tablist'] > div > div:nth-of-type(1)  .dx-tab-text")
+        WebElement general;
+        @FindBy(css = "[aria-selected='true'] .dx-tab-text")
+        WebElement pricing;
+        @FindBy(css = "div:nth-of-type(3)  .dx-tab-text")
+        WebElement shippingPayment;
+        @FindBy(css = "div:nth-of-type(4)  .dx-tab-text")
+        WebElement packaging;
+        @FindBy(css = "div:nth-of-type(5)  .dx-tab-text")
+        WebElement dispensary;
+        @FindBy(css = "div:nth-of-type(6)  .dx-tab-text")
+        WebElement order;
+        @FindBy(css = "div:nth-of-type(7)  .dx-tab-text")
+        WebElement ephedraProduct;
+
+        public GeneralTab enter_GeneralTab() {
+            try {
+                Thread.sleep(2500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            click(general);
+            return new GeneralTab(driver);
+        }
+
+        public PricingTab enter_PricingTab() {
+            try {
+                Thread.sleep(2500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            click(pricing);
+            return new PricingTab(driver);
+        }
+
+        public ShippingPaymentTab enter_ShippingPaymentTab() {
+            try {
+                Thread.sleep(2500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            click(shippingPayment);
+            return new ShippingPaymentTab(driver);
+        }
+
+        public PackagingTab enter_PackagingTab() {
+            try {
+                Thread.sleep(2500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            click(packaging);
+            return new PackagingTab(driver);
+        }
+
+        public DispensaryTab enter_DispensaryTab() {
+            try {
+                Thread.sleep(2500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            click(dispensary);
+            return new DispensaryTab(driver);
+        }
+
+        public OrderTab enter_OrderTab() {
+            try {
+                Thread.sleep(2500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            click(order);
+            return new OrderTab(driver);
+        }
+
+        public EphedraProductTab enter_EphedraProductTab() {
+            try {
+                Thread.sleep(2500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            click(ephedraProduct);
+            return new EphedraProductTab(driver);
+        }
+
+        public static class GeneralTab extends PharmacySettings {
+            public GeneralTab(WebDriver driver) {
+                super(driver);
+            }
+
+            @FindBy(css = "ufc-file-upload[name='file'] > input[type='file']")
+            WebElement hiddenUpload;
+            @FindBy(css = "ufc-file-upload[name='logo'] > input[type='file']")
+            WebElement hiddenLogo;
+            @FindBy(linkText = "ADDLOGO")
+            WebElement addLogo;
+            @FindBy(css = ".dx-button-text")
+            WebElement save;
+
+            // Toast messages
+            @FindBy(css = ".toast-message")
+            WebElement toastMessage;
+
+            String logoPath = "src/test/java/uitest/uploadDocuments/300x120.png";
+            String termsPath = "src/test/java/uitest/uploadDocuments/chart.pdf";
+
+            public void uploadLogo(String expected) {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                String basepath = new File(logoPath).getAbsolutePath();
+                ((JavascriptExecutor) driver).executeScript(expected, hiddenLogo);
+                writeText(hiddenLogo, basepath);
+            }
+
+            public void uploadTerms(String expected) {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                String basepath = new File(termsPath).getAbsolutePath();
+                ((JavascriptExecutor) driver).executeScript(expected, hiddenUpload);
+                writeText(hiddenUpload, basepath);
+            }
+
+            public void saveChanges() {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                click(save);
+            }
+
+            public void assertUploads(String expected) {
+                waitElement(toastMessage);
+                Assert.assertEquals(readText(toastMessage), expected);
+            }
+
+        }
+
+        public static class PricingTab extends PharmacySettings {
+            public PricingTab(WebDriver driver) {
+                super(driver);
+            }
+        }
+
+        public static class ShippingPaymentTab extends PharmacySettings {
+            public ShippingPaymentTab(WebDriver driver) {
+                super(driver);
+            }
+
+            @FindBy(css = ".clinic-settings-title .dx-button-content")
+            WebElement addShipping;
+            @FindBy(css = "td:nth-of-type(1) input[role='textbox']")
+            WebElement methodNameInput;
+            @FindBy(css = "ufc-settings-shipping dx-data-grid[role='presentation'] > div[role='grid'] > div:nth-of-type(6)  table[role='presentation'] > tbody[role='presentation'] > tr:nth-of-type(1) > td:nth-of-type(1)")
+            WebElement methodName;
+            @FindBy(css = ".dx-texteditor-empty [type='text']")
+            WebElement methodPriceInput;
+            @FindBy(css = "ufc-settings-shipping dx-data-grid[role='presentation'] > div[role='grid'] > div:nth-of-type(6)  table[role='presentation'] > tbody[role='presentation'] > tr:nth-of-type(1) > td:nth-of-type(2)")
+            WebElement methodPrice;
+            @FindBy(css = ".col-12.page-footer > dx-button[role='button']")
+            WebElement save;
+            @FindBy(css = "")
+            WebElement deleteMethod;
+            // Payment Methods
+            @FindBy(css = ".dx-scrollview-content [role='option']:nth-of-type(1) .dx-checkbox-icon")
+            WebElement collectionOutside;
+            // Toast message
+            @FindBy(css = ".toast-message")
+            WebElement toastMessage;
+
+            public void addShippingMethod() {
+                waitElement(addShipping);
+                click(addShipping);
+                writeText(methodNameInput, "TestingMethod");
+                click(methodPrice);
+                try {
+                    Thread.sleep(2500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                writeText(methodPriceInput, "15");
+                click(collectionOutside);
+            }
+
+            public void saveChanges() {
+                try {
+                    Thread.sleep(1500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                click(save);
+            }
+
+            public void assertChanges(String expected) {
+                waitElement(toastMessage);
+                Assert.assertEquals(readText(toastMessage), expected);
+            }
+        }
+
+        public static class PackagingTab extends PharmacySettings {
+            public PackagingTab(WebDriver driver) {
+                super(driver);
+            }
+        }
+
+        public static class DispensaryTab extends PharmacySettings {
+            public DispensaryTab(WebDriver driver) {
+                super(driver);
+            }
+        }
+
+        public static class OrderTab extends PharmacySettings {
+            public OrderTab(WebDriver driver) {
+                super(driver);
+            }
+        }
+
+        public static class EphedraProductTab extends PharmacySettings {
+            public EphedraProductTab(WebDriver driver) {
+                super(driver);
+            }
         }
     }
 }

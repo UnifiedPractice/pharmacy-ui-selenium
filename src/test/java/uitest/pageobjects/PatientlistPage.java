@@ -292,7 +292,7 @@ public class PatientlistPage extends BasePage {
 
         public void apply_coupon() {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(3000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

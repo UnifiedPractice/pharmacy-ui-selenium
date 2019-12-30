@@ -22,7 +22,10 @@ public class AdminReports extends BasePage {
     WebElement lotNrRecall;
 
     public AdminOrderReportPage enter_OrderReportPage() {
-
+        waitElement(reportsDropdown);
+        click(reportsDropdown);
+        waitElement(orderReport);
+        click(orderReport);
         return new AdminOrderReportPage(driver);
     }
 
