@@ -39,7 +39,7 @@ public class PatientimportPage extends BasePage {
         String basepath = new File(filePath).getAbsolutePath();
         ((JavascriptExecutor) driver).executeScript(expected, hiddenUpload);
         writeText(hiddenUpload, basepath);
-    }
+    }//
 
     public void validateFile() {
         if (validate.isDisplayed()) {

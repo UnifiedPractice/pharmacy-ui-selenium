@@ -2,14 +2,14 @@
 
 package uitest.pageobjects;
 
+import java.io.File;
+import java.util.List;
+
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
-
-import java.io.File;
-
-import org.openqa.selenium.JavascriptExecutor;
 
 import uitest.BasePage;
 
@@ -18,7 +18,7 @@ public class AdminSettings extends BasePage {
         super(driver);
     }
 
-    // Settings + under settings menu
+    // Settings + under settings menuuu
     @FindBy(css = "li:nth-of-type(3)  .material-icons.ng-star-inserted.site-menu-icon.sub-indicator")
     WebElement settings;
 
@@ -32,17 +32,20 @@ public class AdminSettings extends BasePage {
     WebElement pharmacySettings;
 
     public UserList enter_UserList() {
-
+        waitElement(userList);
+        click(userList);
         return new UserList(driver);
     }
 
     public PractitionerList enter_PractitionerList() {
-
+        waitElement(practitionerList);
+        click(practitionerList);
         return new PractitionerList(driver);
     }
 
     public AdminSettings enter_PractitionerApplications() {
-
+        waitElement(practitionerApplications);
+        click(practitionerApplications);
         return new AdminSettings(driver);
     }
 
@@ -55,6 +58,37 @@ public class AdminSettings extends BasePage {
     public static class UserList extends AdminSettings {
         public UserList(WebDriver driver) {
             super(driver);
+        }
+
+        @FindBy(linkText = "Send User Invite")
+        WebElement sendInvite;
+        @FindBy(css = ".dx-editor-underlined.dx-show-clear-button.dx-textbox.dx-texteditor.dx-texteditor-empty.dx-widget.ng-invalid.ng-pristine.ng-touched.user-box__input  input[role='textbox']")
+        WebElement firstName;
+        @FindBy(css = "ufc-form-render .ng-touched:nth-of-type(2) [type]")
+        WebElement lastName;
+        @FindBy(css = "ufc-form-render .ng-touched:nth-of-type(3) [type]")
+        WebElement email;
+        @FindBy(css = ".dx-dropdowneditor-icon")
+        WebElement role;
+        @FindBy(css = ".dx-scrollview-content")
+        List<WebElement> roleList;
+        @FindBy(css = ".dx-button-text")
+        WebElement send;
+
+        public void sendInvitation(String expectedRole, String expectedEmail) {
+            waitElement(sendInvite);
+            click(sendInvite);
+            waitElement(firstName);
+            writeText(email, expectedEmail);
+            randomName(firstName);
+            randomName(lastName);
+            click_element_from_dropdown(role, roleList, expectedRole);
+            try {
+                Thread.sleep(1500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            click(send);
         }
     }
 
@@ -107,7 +141,7 @@ public class AdminSettings extends BasePage {
 
         public void approve_application() {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -117,8 +151,8 @@ public class AdminSettings extends BasePage {
             click(yes);
         }
 
-        public void assert_approval(String errorName) {
-            Assert.assertEquals(readText(approvalMessage), errorName);
+        public void assert_approval(String expected) {
+            Assert.assertEquals(readText(approvalMessage), expected);
         }
 
     }
@@ -284,6 +318,7 @@ public class AdminSettings extends BasePage {
                 super(driver);
             }
 
+            // Shipping Payment Tab buttons + inputs
             @FindBy(css = ".clinic-settings-title .dx-button-content")
             WebElement addShipping;
             @FindBy(css = "td:nth-of-type(1) input[role='textbox']")
@@ -355,6 +390,65 @@ public class AdminSettings extends BasePage {
         public static class EphedraProductTab extends PharmacySettings {
             public EphedraProductTab(WebDriver driver) {
                 super(driver);
+            }
+
+            @FindBy(css = ".dx-dropdowneditor-icon")
+            WebElement loadProducts;
+            @FindBy(css = ".dx-scrollview-content > div:nth-of-type(1) .col-4")
+            WebElement product;
+            @FindBy(css = "ufc-settings-ephedra-product .dx-button-text")
+            WebElement save;
+            @FindBy(css = ".c-user-box [data-max-size]")
+            WebElement waiverInput;
+            @FindBy(css = ".dx-show-clear-button.ng-touched [type='text']")
+            WebElement normalThresh;
+            @FindBy(css = "[class='col-6']:nth-of-type(2) [type='text']")
+            WebElement maxThresh;
+            @FindBy(css = ".toast-message")
+            WebElement toastMessage;
+            String filePath = "";
+
+            public void selectProduct() {
+                waitElement(loadProducts);
+                click(loadProducts);
+                waitElement(product);
+                click(product);
+            }
+
+            public void setThresholds() {
+                try {
+                    Thread.sleep(1500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                writeText(normalThresh, "10");
+                writeText(maxThresh, "20");
+            }
+
+            // test
+            public void uploadWaiver(String expected) {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                String basepath = new File(filePath).getAbsolutePath();
+                ((JavascriptExecutor) driver).executeScript(expected, waiverInput);
+                writeText(waiverInput, basepath);
+            }
+
+            public void saveEphedra() {
+                try {
+                    Thread.sleep(2500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                click(save);
+            }
+
+            public void assertChanges(String expected) {
+                waitElement(toastMessage);
+                Assert.assertEquals(readText(toastMessage), expected);
             }
         }
     }

@@ -125,7 +125,7 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(PractitionerProfilePage.class).changePass_req(Variables.actualPass, Variables.newPass,
                 Variables.confirmPass);
         page.GetInstance(PractitionerProfilePage.class).changePassword();
-    }
+    }//
 
     @Test // done
     public void import_ChineseNames() throws InterruptedException {
@@ -197,7 +197,7 @@ class SmokeTests extends TestNgTestBase {
     }
 
     @Test // done
-    public void terms_and_conditions() throws InterruptedException {
+    public void terms_and_conditions_upload() throws InterruptedException {
         page.GetInstance(LoginPage.class).openHelioscript();
         page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
         page.GetInstance(AdminSettings.class).enter_PharmacySettings();
@@ -230,5 +230,47 @@ class SmokeTests extends TestNgTestBase {
         page.GetInstance(AdminSettings.PharmacySettings.ShippingPaymentTab.class).saveChanges();
         page.GetInstance(AdminSettings.PharmacySettings.ShippingPaymentTab.class)
                 .assertChanges("Settings saved successfully");
+    }
+
+    @Test // dropSelect to implement
+    public void set_EphedraProduct() {
+        page.GetInstance(LoginPage.class).openHelioscript();
+        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
+        page.GetInstance(AdminSettings.class).enter_PharmacySettings();
+        page.GetInstance(AdminSettings.PharmacySettings.class).enter_EphedraProductTab();
+        page.GetInstance(AdminSettings.PharmacySettings.EphedraProductTab.class).selectProduct();
+        page.GetInstance(AdminSettings.PharmacySettings.EphedraProductTab.class).setThresholds();
+        page.GetInstance(AdminSettings.PharmacySettings.EphedraProductTab.class).uploadWaiver(Variables.uploadJS);
+        page.GetInstance(AdminSettings.PharmacySettings.EphedraProductTab.class).saveEphedra();
+        page.GetInstance(AdminSettings.PharmacySettings.EphedraProductTab.class)
+                .assertChanges("Settings saved successfully");
+    }
+
+    // to use randomName() for names
+    @Test
+    public void send_AdminInvitation() {
+        page.GetInstance(LoginPage.class).openHelioscript();
+        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
+        page.GetInstance(AdminSettings.class).enter_UserList();
+        page.GetInstance(AdminSettings.UserList.class).sendInvitation("ADMIN", "pending@mail.com");
+        page.GetInstance(AdminSettings.UserList.class).assert_sentInvitation("Invite has been sent.");
+    }
+
+    @Test
+    public void send_PractitionerInvitation() {
+        page.GetInstance(LoginPage.class).openHelioscript();
+        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
+        page.GetInstance(AdminSettings.class).enter_UserList();
+        page.GetInstance(AdminSettings.UserList.class).sendInvitation("Practitioner", "pending@mail.com");
+        page.GetInstance(AdminSettings.UserList.class).assert_sentInvitation("Invite has been sent.");
+    }
+
+    @Test
+    public void send_CSRInvitation() {
+        page.GetInstance(LoginPage.class).openHelioscript();
+        page.GetInstance(LoginPage.class).login(Variables.admin, Variables.actualPass);
+        page.GetInstance(AdminSettings.class).enter_UserList();
+        page.GetInstance(AdminSettings.UserList.class).sendInvitation("CSR", "pending@mail.com");
+        page.GetInstance(AdminSettings.UserList.class).assert_sentInvitation("Invite has been sent.");
     }
 }
