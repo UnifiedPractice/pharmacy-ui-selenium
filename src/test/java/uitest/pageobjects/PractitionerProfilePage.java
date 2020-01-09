@@ -36,7 +36,7 @@ public class PractitionerProfilePage extends BasePage {
     WebElement save3;
 
     // Logo
-    @FindBy(linkText = "ADDLOGO")
+    @FindBy(css = ".logo-preview-upload > .logo-preview.ng-star-inserted")
     WebElement logo;
     @FindBy(css = "[name='logo'] [data-max-size]")
     WebElement logoInput;
@@ -58,7 +58,7 @@ public class PractitionerProfilePage extends BasePage {
 
     //
     String filePath = "src/test/java/uitest/uploadDocuments/chart.pdf";
-    @FindBy(css = ".toast-message")
+    @FindBy(xpath = "//div[@id='toast-container']//div[@role='alertdialog']")
     WebElement successMessage;
 
     public void changePass_req(String oldPass, String newPass, String confirmPass) {
@@ -89,7 +89,11 @@ public class PractitionerProfilePage extends BasePage {
 
     public void uploadLogo(String expected) {
         String basepath = new File(imgPath).getAbsolutePath();
-        waitElement(logo);
+        try {
+            Thread.sleep(2500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         ((JavascriptExecutor) driver).executeScript(expected, logoInput);
         writeText(logoInput, basepath);
     }
@@ -101,16 +105,17 @@ public class PractitionerProfilePage extends BasePage {
 
     public void saveCertificate() throws InterruptedException {
         waitElement(firstName);
-        writeText(firstName, "test");
+        randomName(firstName);
         Thread.sleep(4000);
         click(save1);
     }
 
-    public void assert_PassChange(String expected) {
-        Assert.assertEquals(readText(""), expected);
+    public void assertChange(String expected) {
+        waitElement(successMessage);
+        Assert.assertEquals(readText(successMessage), expected);
     }
 
-    public void assert_CertificateUpload(String expected) throws InterruptedException {
+    public void assertCeva(String expected) throws InterruptedException {
         waitElement(successMessage);
         Assert.assertEquals(readText(successMessage), expected);
     }

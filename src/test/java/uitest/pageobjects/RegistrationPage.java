@@ -71,24 +71,25 @@ public class RegistrationPage extends BasePage {
     @FindBy(css = ".modal h4")
     WebElement successMessage;
 
-    public void writeCredentials() throws InterruptedException {
+    public void writeCredentials(String firstName, String lastName, String clinicName, String email, String phone,
+            String address, String city, String zipCode, String license) throws InterruptedException {
 
-        writeText(firstName, Variables.fName);
+        writeText(firstName, firstName);
 
-        writeText(lastName, Variables.lName);
+        writeText(lastName, lastName);
 
-        writeText(clinicName, Variables.clinicName);
+        writeText(clinicName, clinicName);
 
-        writeText(email, Variables.emailAddress);
+        writeText(email, email);
 
-        writeText(phoneNumber, Variables.phoneNumber);
+        writeText(phoneNumber, phone);
 
-        writeText(address, Variables.address);
+        writeText(address, address);
 
-        writeText(city, Variables.city);
+        writeText(city, city);
 
-        writeText(zipcode, Variables.zipCode);
-        writeText(license, Variables.license);
+        writeText(zipcode, zipCode);
+        writeText(license, license);
     }
 
     public void selectDropdowns() throws InterruptedException {

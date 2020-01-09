@@ -27,7 +27,7 @@ public class LoginPage extends BasePage {
 
     @FindBy(css = ".error")
     WebElement credentialError;
-    
+
     // New Account Registration
     @FindBy(css = "[tabindex='5']")
     WebElement newAccount;
@@ -45,9 +45,9 @@ public class LoginPage extends BasePage {
         return new PractitionerHomePage(driver);
     }
 
-    public void verify_invalidUser() {
+    public void assert_wrongUser_errorMessage(String expected) throws InterruptedException {
         waitElement(credentialError);
-        Assert.assertEquals(readText(credentialError), Variables.loginEM);
+        Assert.assertEquals(readText(credentialError), expected);
     }
 
     public RegistrationPage enter_Registration() {

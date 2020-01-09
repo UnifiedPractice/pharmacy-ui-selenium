@@ -12,6 +12,7 @@ import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
 import uitest.BasePage;
+import uitest.Variables;
 
 public class AdminSettings extends BasePage {
     public AdminSettings(WebDriver driver) {
@@ -60,35 +61,100 @@ public class AdminSettings extends BasePage {
             super(driver);
         }
 
+        Variables variables;
+
+        // Send invite locators
         @FindBy(linkText = "Send User Invite")
         WebElement sendInvite;
-        @FindBy(css = ".dx-editor-underlined.dx-show-clear-button.dx-textbox.dx-texteditor.dx-texteditor-empty.dx-widget.ng-invalid.ng-pristine.ng-touched.user-box__input  input[role='textbox']")
+        @FindBy(xpath = "//div[@id='#invitationPopup']/div[@class='row']/form/ufc-form-render/div[1]/div[@class='c-user-box']/div[@class='user-box__item']/dx-text-box//input[@role='textbox']")
         WebElement firstName;
-        @FindBy(css = "ufc-form-render .ng-touched:nth-of-type(2) [type]")
+        @FindBy(xpath = "//div[@id='#invitationPopup']/div[@class='row']/form/ufc-form-render/div[2]/div[@class='c-user-box']/div[@class='user-box__item']/dx-text-box//input[@role='textbox']")
         WebElement lastName;
-        @FindBy(css = "ufc-form-render .ng-touched:nth-of-type(3) [type]")
+        @FindBy(xpath = "//div[@id='#invitationPopup']/div[@class='row']/form/ufc-form-render/div[3]/div[@class='c-user-box']/div[@class='user-box__item']/dx-text-box//input[@role='textbox']")
         WebElement email;
-        @FindBy(css = ".dx-dropdowneditor-icon")
-        WebElement role;
-        @FindBy(css = ".dx-scrollview-content")
+        @FindBy(xpath = "//body/div[2]/div/div[@class='dx-popup-content']/div[@role='listbox']//div[@class='dx-scrollview-content']")
         List<WebElement> roleList;
         @FindBy(css = ".dx-button-text")
         WebElement send;
+        // Roles locators
+        @FindBy(css = ".dx-dropdowneditor-icon")
+        WebElement role;
+        @FindBy(xpath = "//body/div[2]/div/div[@class='dx-popup-content']/div[@role='listbox']//div[@class='dx-scrollview-content']/div[1]/div[@class='dx-item-content dx-list-item-content']")
+        WebElement CSR;
+        @FindBy(xpath = "//body/div[2]/div/div[@class='dx-popup-content']/div[@role='listbox']//div[@class='dx-scrollview-content']/div[2]/div[@class='dx-item-content dx-list-item-content']")
+        WebElement compounder;
+        @FindBy(xpath = "//body/div[2]/div/div[@class='dx-popup-content']/div[@role='listbox']//div[@class='dx-scrollview-content']/div[3]/div[@class='dx-item-content dx-list-item-content']")
+        WebElement admin;
+        // Notification locator
+        @FindBy(css = ".toast-message")
+        WebElement toastMessage;
 
-        public void sendInvitation(String expectedRole, String expectedEmail) {
+        public void send_CSR_Invitation() {
             waitElement(sendInvite);
             click(sendInvite);
-            waitElement(firstName);
-            writeText(email, expectedEmail);
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
+            }
+            generateEmail(email);
             randomName(firstName);
             randomName(lastName);
-            click_element_from_dropdown(role, roleList, expectedRole);
+            click(role);
+            click(CSR);
             try {
                 Thread.sleep(1500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             click(send);
+        }
+
+        public void send_Compounder_Invitation() {
+            waitElement(sendInvite);
+            click(sendInvite);
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
+            }
+            generateEmail(email);
+            randomName(firstName);
+            randomName(lastName);
+            click(role);
+            click(compounder);
+            try {
+                Thread.sleep(1500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            click(send);
+        }
+
+        public void send_Admin_Invitation() {
+            waitElement(sendInvite);
+            click(sendInvite);
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
+            }
+            generateEmail(email);
+            randomName(firstName);
+            randomName(lastName);
+            click(role);
+            click(admin);
+            try {
+                Thread.sleep(1500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            click(send);
+        }
+
+        public void assert_sentInvitation(String expected) {
+            waitElement(toastMessage);
+            Assert.assertEquals(readText(toastMessage), expected);
         }
     }
 
@@ -262,7 +328,7 @@ public class AdminSettings extends BasePage {
             @FindBy(css = ".dx-button-text")
             WebElement save;
 
-            // Toast messages
+            // Toast message
             @FindBy(css = ".toast-message")
             WebElement toastMessage;
 

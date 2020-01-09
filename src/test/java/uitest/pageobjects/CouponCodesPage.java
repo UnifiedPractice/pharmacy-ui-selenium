@@ -5,6 +5,7 @@ package uitest.pageobjects;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 import uitest.BasePage;
 import uitest.Variables;
@@ -53,6 +54,9 @@ public class CouponCodesPage extends BasePage {
     @FindBy(css = "[type='success'] .dx-button-content")
     WebElement save;
 
+    @FindBy(css = ".toast-message")
+    WebElement toastMessage;
+
     public void set_new_Coupon(String description, String min_value, String order_value, String active_from1,
             String active_to1, String uses) {
         waitElement(add_new_Coupon);
@@ -69,6 +73,11 @@ public class CouponCodesPage extends BasePage {
         writeText(active_to, active_to1);
         writeText(uses_per_practitioner, uses);
         click(save);
+    }
+
+    public void assertChange(String expected) {
+        waitElement(toastMessage);
+        Assert.assertEquals(readText(toastMessage), expected);
     }
 
 }

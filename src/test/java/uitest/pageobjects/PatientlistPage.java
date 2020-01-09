@@ -97,20 +97,40 @@ public class PatientlistPage extends BasePage {
         return new IngredientsPage(driver);
     }
 
-    public void addPatient() {
-        waitElement(addPatient);
+    public void completeCredentials(String emailAddresss, String firstNamee, String lastNamee, String birthdayy,
+            String phoneNumberr) {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        // waitElement(addPatient);
         click(addPatient);
-        waitElement(emailAddress);
-        writeText(emailAddress, Variables.emailAddress);
-        writeText(firstName, Variables.firstName);
-        writeText(lastName, Variables.lastName);
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        // waitElement(emailAddress);
+        writeText(emailAddress, emailAddresss);
+        writeText(firstName, firstNamee);
+        writeText(lastName, lastNamee);
 
-        writeText(birthDate, Variables.dObOption);
+        writeText(birthDate, birthdayy);
         waitElement(genderDropdown);
         click(genderDropdown);
         click(genderSelect);
 
-        writeText(phoneNumber, Variables.phoneNumber);
+        writeText(phoneNumber, phoneNumberr);
+        click(lastName);
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         click(phoneNumberDropdown);
         waitElement(phoneNumberSelect);
         click(phoneNumberSelect);
@@ -122,7 +142,9 @@ public class PatientlistPage extends BasePage {
         click(stateDropdown);
         waitElement(stateSelect);
         click(stateSelect);
+    }
 
+    public void savePatient() {
         click(saveButton);
     }
 
@@ -131,7 +153,7 @@ public class PatientlistPage extends BasePage {
         click(orderDetails);
     }
 
-    public String get_orderName() {
+    private String get_orderName() {
         waitElement(orderNumber);
         // Get Sentence
         String order = readText(orderNumber);
@@ -186,8 +208,8 @@ public class PatientlistPage extends BasePage {
             click(addIngredient);
         }
 
-        public void roundupIngredients() {
-            writeText(setQ, "1");
+        public void roundupIngredients(String quantity) {
+            writeText(setQ, quantity);
         }
 
         public PlaceOrderPage checkoutOrder() {
@@ -290,13 +312,13 @@ public class PatientlistPage extends BasePage {
             click(sendOrder);
         }
 
-        public void apply_coupon() {
+        public void apply_coupon(String expected) {
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            writeText(couponInput, "SUN10");
+            writeText(couponInput, expected);
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {

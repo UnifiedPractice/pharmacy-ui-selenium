@@ -115,6 +115,19 @@ public class BasePage extends PageGenerator {
         }
     }
 
+    // Random Email Generator
+    public <T> void generateEmail(T elementAttr) {
+        String[] names = { "one_sunten@yopmail.com", "two_sunten@yopmail.com", "three_sunten@yopmail.com",
+                "four_sunten@yopmail.com", "five_sunten@yopmail.com" };
+        Random random = new Random();
+        String result = names[random.nextInt(names.length)];
+        if (elementAttr.getClass().getName().contains("By")) {
+            driver.findElement((By) elementAttr).sendKeys(result);
+        } else {
+            ((WebElement) elementAttr).sendKeys(result);
+        }
+    }
+
     // Random Number write
     public <T> void randomNumber(T elementAttr) {
         Random number = new Random();
@@ -164,24 +177,7 @@ public class BasePage extends PageGenerator {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        f.deleteOnExit();
+        f.delete();
     }
-
-    // public void assert_pageText() {
-    // boolean result = readText(offerTitle).toString().equals("")
-    // && readText(offerBody).toString().equals(
-    // "0")
-    // && readText(offerFooter).toString().equals(
-    // ".")
-    // && readText(licensed).toString()
-    // .equals("")
-    // && readText(topPayments).toString()
-    //////// .equals("")
-    // && readText(servicingCP).toString().equals("")
-    // && readText(amountDest).toString().equals("")
-    // && readText(aboutRecip).toString().equals("")
-    // && readText(finishTransfer).toString().equals("");
-    // Assert.assertTrue(result);
-    // }
 
 }
