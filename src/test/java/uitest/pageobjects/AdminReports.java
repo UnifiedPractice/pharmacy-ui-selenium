@@ -79,6 +79,11 @@ public class AdminReports extends BasePage {
         public void exportCSV() {
             waitElement(exportCSV);
             click(exportCSV);
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
         public void assertExport(String fileName) {

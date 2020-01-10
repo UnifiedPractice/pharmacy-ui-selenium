@@ -180,4 +180,17 @@ public class BasePage extends PageGenerator {
         f.delete();
     }
 
+    public boolean checkIfFileExists(String downloadPath, String fileName) {
+        File dir = new File(downloadPath);
+        File[] dirContents = dir.listFiles();
+
+        for (int i = 0; i < dirContents.length; i++) {
+            if (dirContents[i].getName().equals(fileName)) {
+                dirContents[i].delete();
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

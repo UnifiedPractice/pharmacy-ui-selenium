@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.security.MessageDigest;
+import java.util.EventListener;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -17,7 +18,11 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -26,6 +31,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
 import ru.stqa.selenium.factory.WebDriverPool;
+import uitest.utilities.WebEventListener;
 
 /**
  * Base class for TestNG-based test classes
@@ -40,7 +46,10 @@ public class TestNgTestBase {
     protected static String timestampStarted;
     protected static String endpointBrowserName;
 
-    protected WebDriver driver;
+    public static EventFiringWebDriver e_driver;
+    public static WebEventListener eventListener;
+
+    public static WebDriver driver;
     public WebDriverWait wait;
     public PageGenerator page;
 
@@ -63,6 +72,7 @@ public class TestNgTestBase {
         SuiteConfiguration config = new SuiteConfiguration();
         baseUrl = config.getProperty("site.url");
         capabilities = (DesiredCapabilities) config.getCapabilities();
+        // chromeOptions = (ChromeOptions) config.getCapabilities();
         timestampStarted = config.getTimestampStarted();
         endpointBrowserName = config.getEndpointBrowserName();
         if (config.hasProperty("grid.url") && !"".equals(config.getProperty("grid.url"))) {
@@ -91,7 +101,7 @@ public class TestNgTestBase {
         if (config.hasProperty("screenshotOnFailure")) {
             screenshotOnFailure = Boolean.valueOf(config.getProperty("screenshotOnFailure"));
         }
-    }
+    }//
 
     /**
      * <p>
@@ -103,9 +113,7 @@ public class TestNgTestBase {
      * </p>
      */
     protected WebDriver getDriver() {
-
         page = new PageGenerator(driver);
-
         StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
         for (int i = 2; i < stackTraceElements.length; i++) {
             WebDriver driver = drivers.get(stackTraceElements[i].getMethodName());
@@ -142,6 +150,11 @@ public class TestNgTestBase {
         }
         drivers.put(method.getName(), driver);
         page = new PageGenerator(driver);
+
+        e_driver = new EventFiringWebDriver(driver);
+        eventListener = new WebEventListener();
+        e_driver.register(eventListener);
+        driver = e_driver;
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
         driver.get(Variables.helioUrl);
@@ -161,7 +174,7 @@ public class TestNgTestBase {
     }
 
     @AfterSuite(alwaysRun = true)
-    public void tearDown() {
+    public void tearDown() {//
         if (!debugMode) {
             WebDriverPool.DEFAULT.dismissAll();
         }

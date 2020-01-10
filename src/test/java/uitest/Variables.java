@@ -1,5 +1,8 @@
 package uitest;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.UUID;
 
 import org.apache.commons.lang3.RandomStringUtils;
@@ -52,6 +55,12 @@ public class Variables {
     public static String Active_from_Date = "11/20/2019";
     // Active To
     public static String Active_toDate = "11/30/2020";
+    // Date & Time Formatting
+    public static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("EEEE, MMM dd, yyyy");
+    public static DateTimeFormatter der = DateTimeFormatter.ofPattern("MM_dd_yyyy", Locale.ENGLISH);
+    public static LocalDate localDate = LocalDate.now();
+    public static String ParsedDate = dtf.format(localDate);
+    public static String MyLocalDate = der.format(localDate);
 
     // Javascript executor commands
     public static String uploadJS = "arguments[0].removeAttribute('style')";

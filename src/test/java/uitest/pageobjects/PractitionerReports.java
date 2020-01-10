@@ -13,7 +13,8 @@ public class PractitionerReports extends BasePage {
     public PractitionerReports(WebDriver driver) {
         super(driver);
     }
-    //s
+
+    // s
     public static class PractitionerOrderReportPage extends PractitionerReports {
         public PractitionerOrderReportPage(WebDriver driver) {
             super(driver);
@@ -40,6 +41,10 @@ public class PractitionerReports extends BasePage {
 
         public void assertExport(String fileName) {
             assertDownload(fileName);
+        }
+
+        public void isFileDownloaded(String fileName) {
+            checkIfFileExists("C:/Users/Andrew/Downloads", fileName);
         }
     }
 }

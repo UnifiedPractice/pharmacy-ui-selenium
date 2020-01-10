@@ -1,13 +1,23 @@
 {
   "endpoints": [
     {
+      "browserName": "chrome",
       "active": true,
-      "capabilities": {},
+      "capabilities": {
+        "chromeOptions": {
+          "prefs": {
+            "args": {
+              "download.default_directory": "C:/Users/Andrew/Desktop",
+              "download.prompt_for_download": "false",
+              "profile.default_content_settings.popups": 0
+            }
+          }
+        }
+      },
       "headless": false,
       "id": "023c513b-82ed-9a54-4f7c-8e5bdb59e9f1",
       "name": "Google Chrome",
-      "type": "local",
-      "browserName": "chrome"
+      "type": "local"
     }
   ]
 }
