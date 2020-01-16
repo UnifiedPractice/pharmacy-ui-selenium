@@ -5,6 +5,7 @@ import org.openqa.selenium.Platform;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
@@ -22,6 +23,7 @@ public class SuiteConfiguration {
 
     private Properties properties;
 
+    //
     public SuiteConfiguration() throws IOException {
         this(System.getProperty("application.properties", DEBUG_PROPERTIES));
     }
@@ -48,7 +50,7 @@ public class SuiteConfiguration {
         for (String name : capsProps.stringPropertyNames()) {
             String value = capsProps.getProperty(name);
             if (name.equals("browserName")) {
-                browserName = value;
+                browserName = value;//
             }
             if (value.toLowerCase().equals("true") || value.toLowerCase().equals("false")) {
                 capabilities.setCapability(name, Boolean.valueOf(value));
@@ -78,6 +80,12 @@ public class SuiteConfiguration {
             case "chrome":
                 final ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments("--headless");
+                Map<String, Object> prefs = new HashMap<String, Object>();
+                // prefs.put("profile.default_content_settings.popups", 0);
+                //prefs.put("download.default_directory", "C:/Users/Andrew/Desktop");
+                // prefs.put("download.prompt_for_download", "true");
+                chromeOptions.setExperimentalOption("prefs", prefs);
+                // capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
                 capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
                 break;
             }

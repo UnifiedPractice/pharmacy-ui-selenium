@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.security.MessageDigest;
-import java.util.EventListener;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -15,12 +14,11 @@ import com.google.gson.JsonParser;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.io.FileUtils;
+
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -36,7 +34,7 @@ import uitest.utilities.WebEventListener;
 /**
  * Base class for TestNG-based test classes
  */
-public class TestNgTestBase {
+public class TestNgTestBase {//
 
     protected static URL gridHubUrl = null;
     protected static String baseUrl;
@@ -67,7 +65,7 @@ public class TestNgTestBase {
 
     private Map<String, WebDriver> drivers = new HashMap<String, WebDriver>();
 
-    @BeforeSuite
+    @BeforeSuite //
     public void initTestSuite() throws IOException {
         SuiteConfiguration config = new SuiteConfiguration();
         baseUrl = config.getProperty("site.url");

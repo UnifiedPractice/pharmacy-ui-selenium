@@ -44,7 +44,7 @@ public class BasePage extends PageGenerator {
         if (elementAttr.getClass().getName().contains("By")) {
             wait.until(ExpectedConditions.elementToBeClickable((By) elementAttr));
         } else {
-            wait.until(ExpectedConditions.elementToBeClickable((WebElement) elementAttr));
+            wait.until(ExpectedConditions.visibilityOf((WebElement) elementAttr));
         }
     }
 

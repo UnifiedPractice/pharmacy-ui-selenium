@@ -9,6 +9,7 @@ import org.testng.Assert;
 
 import uitest.BasePage;
 import uitest.Variables;
+import uitest.pageobjects.AdminSettings.PractitionerList;
 
 public class LoginPage extends BasePage {
 
@@ -36,13 +37,13 @@ public class LoginPage extends BasePage {
         driver.get(Variables.helioUrl);
     }
 
-    public PractitionerHomePage login(String user, String pass) {
+    public PractitionerList login(String user, String pass) {
         waitElement(username);
         writeText(username, user);
         writeText(password, pass);
         click(loginButton);
 
-        return new PractitionerHomePage(driver);
+        return new PractitionerList(driver);
     }
 
     public void assert_wrongUser_errorMessage(String expected) throws InterruptedException {

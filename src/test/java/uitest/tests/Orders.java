@@ -15,7 +15,7 @@ import uitest.pageobjects.LoginPage;
 import uitest.pageobjects.PatientlistPage;
 
 class Orders extends TestNgTestBase {
-    @Test(enabled = true)
+    @Test(enabled = true, priority = 2)
     public void placeOrder() throws InterruptedException {
         page.GetInstance(LoginPage.class).openHelioscript();
         page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.actualPass);
@@ -27,7 +27,7 @@ class Orders extends TestNgTestBase {
         page.GetInstance(PatientlistPage.class).assertOrder(Variables.orderSent);
     }
 
-    @Test(enabled = true, priority = 2)
+    @Test(enabled = false, priority = 3)
     public void placeOrder_withCoupon() {
         page.GetInstance(LoginPage.class).openHelioscript();
         page.GetInstance(LoginPage.class).login(Variables.practitioner, Variables.actualPass);
