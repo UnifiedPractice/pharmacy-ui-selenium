@@ -14,7 +14,7 @@ public class AdminReports extends BasePage {
         super(driver);
     }
 
-    // ss - late order
+    // ss - late orderr
     @FindBy(css = "li:nth-of-type(5)  .material-icons.ng-star-inserted.site-menu-icon.sub-indicator")
     WebElement reportsDropdown;
     @FindBy(css = ".site-menu-sub-item.ng-star-inserted .site-menu-title")
