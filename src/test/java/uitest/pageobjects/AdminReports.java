@@ -22,6 +22,7 @@ public class AdminReports extends BasePage {
     @FindBy(css = ".site-menu li:nth-of-type(5) .ng-star-inserted:nth-of-type(3) .site-menu-title")
     WebElement lotNrRecall;
 
+    // Claudiu
     public AdminOrderReportPage enter_OrderReportPage() {
         waitElement(reportsDropdown);
         click(reportsDropdown);
