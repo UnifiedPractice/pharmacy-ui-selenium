@@ -27,6 +27,7 @@ class Orders extends TestNgTestBase {
         page.GetInstance(PatientlistPage.class).assertOrder(Variables.orderSent);
     }
 
+    // Place order with coupon
     @Test(enabled = false, priority = 3)
     public void placeOrder_withCoupon() {
         page.GetInstance(LoginPage.class).openHelioscript();
