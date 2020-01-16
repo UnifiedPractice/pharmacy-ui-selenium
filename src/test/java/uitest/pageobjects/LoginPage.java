@@ -17,6 +17,7 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
+    // Username
     @FindBy(css = "[type='email']")
     WebElement username;
 
