@@ -8,15 +8,11 @@ import org.openqa.selenium.support.FindBy;
 
 import uitest.BasePage;
 
-// Admin Reports
-// Pavel
-// Emil
 public class AdminReports extends BasePage {
     public AdminReports(WebDriver driver) {
         super(driver);
     }
 
-    // ss - late orderr
     @FindBy(css = "li:nth-of-type(5)  .material-icons.ng-star-inserted.site-menu-icon.sub-indicator")
     WebElement reportsDropdown;
     @FindBy(css = ".site-menu-sub-item.ng-star-inserted .site-menu-title")
@@ -24,7 +20,6 @@ public class AdminReports extends BasePage {
     @FindBy(css = ".site-menu li:nth-of-type(5) .ng-star-inserted:nth-of-type(3) .site-menu-title")
     WebElement lotNrRecall;
 
-    // Claudiu
     public AdminOrderReportPage enter_OrderReportPage() {
         waitElement(reportsDropdown);
         click(reportsDropdown);
@@ -45,7 +40,6 @@ public class AdminReports extends BasePage {
         return new LotNumberRecallReport(driver);
     }
 
-    // bb
     public static class AdminOrderReportPage extends AdminReports {
         public AdminOrderReportPage(WebDriver driver) {
             super(driver);
@@ -73,7 +67,6 @@ public class AdminReports extends BasePage {
 
     }
 
-    // cc
     public static class LotNumberRecallReport extends AdminReports {
         public LotNumberRecallReport(WebDriver driver) {
             super(driver);
