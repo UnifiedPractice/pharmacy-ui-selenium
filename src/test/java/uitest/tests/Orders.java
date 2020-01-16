@@ -41,6 +41,7 @@ class Orders extends TestNgTestBase {
         page.GetInstance(PatientlistPage.class).assertOrder(Variables.orderSent);
     }
 
+    // Ship Order
     @Test(enabled = true, dependsOnMethods = "placeOrder")
     public void shipOrder() throws InterruptedException {
         page.GetInstance(LoginPage.class).openHelioscript();
@@ -53,6 +54,7 @@ class Orders extends TestNgTestBase {
         page.GetInstance(DispensaryPage.class).assertTitle();
     }
 
+    // Late Order
     @Test(enabled = true, priority = 1)
     public void assert_LateOrder() throws InterruptedException {
         page.GetInstance(LoginPage.class).openHelioscript();
