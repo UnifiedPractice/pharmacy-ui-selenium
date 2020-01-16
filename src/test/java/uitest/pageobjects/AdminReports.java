@@ -69,6 +69,7 @@ public class AdminReports extends BasePage {
 
     }
 
+    // cc
     public static class LotNumberRecallReport extends AdminReports {
         public LotNumberRecallReport(WebDriver driver) {
             super(driver);
