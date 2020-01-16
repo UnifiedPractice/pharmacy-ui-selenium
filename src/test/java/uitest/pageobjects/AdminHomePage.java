@@ -16,6 +16,8 @@ import uitest.pageobjects.InventoryPages.ProductCatalog;
 import uitest.pageobjects.AdminReports.AdminOrderReportPage;
 import uitest.pageobjects.AdminSettings.PractitionerApplications;
 
+// Admin HomePage
+
 public class AdminHomePage extends BasePage {
     public AdminHomePage(WebDriver driver) {
         super(driver);
