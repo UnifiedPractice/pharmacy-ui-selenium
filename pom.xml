@@ -174,10 +174,11 @@
 
 
 
-			<plugin><!-- HAVE -->
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0-M1</version>
+				<inherited>true</inherited>
 				<configuration>
 					<suiteXmlFiles>
 						<suiteXmlFile>src/test/java/tests/smokeTests-testSuite.xml</suiteXmlFile>
@@ -193,12 +194,12 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
-					<!-- <fork>true</fork>
-                    <executable>C:\Program Files\Java\jdk1.8.0_221\bin\javac</executable> -->
+					<fork>true</fork>
+                    <executable>C:\Program Files\Java\jdk1.8.0_221\bin\javac</executable> 
 				</configuration>
 			</plugin>
 
-			<!-- I need this plugin -->
+		
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
