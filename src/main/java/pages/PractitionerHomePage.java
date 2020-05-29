@@ -13,8 +13,8 @@ public class PractitionerHomePage extends BasePage {
 	// Page Locators - Left side main menu buttons
 	private By patientList = By
 			.cssSelector(".site-menu .site-menu-item.ng-star-inserted:nth-of-type(1) .site-menu-title");
-	private By patientImport = By.cssSelector(".site-menu > .ng-star-inserted:nth-of-type(2) .site-menu-title");
-	private By commissions = By.cssSelector(".site-menu .ng-star-inserted:nth-of-type(3) .site-menu-title");
+	private By patientImport = By.cssSelector(".site-menu > .ng-star-inserted:nth-of-t.site-menu .ng-star-inserted:nth-of-type(3) .site-menu-titleype(2) .site-menu-title");
+	private By commissions = By.cssSelector("a[href='/commissions']");
 	private By myAccount = By.cssSelector(".site-menu .ng-star-inserted:nth-of-type(4) .site-menu-title");
 	private By orderReport = By.cssSelector(".has-sub > .ng-star-inserted:nth-child(1)");
 	private By orderReportSelect = By.cssSelector(".site-menu-sub-item.ng-star-inserted .site-menu-title");

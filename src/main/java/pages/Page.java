@@ -12,7 +12,7 @@ public abstract class Page {
 
 	    public Page(WebDriver driver) {
 	        this.driver = driver;
-	        this.wait = new WebDriverWait(this.driver, 20);
+	        this.wait = new WebDriverWait(this.driver, 40);
 	    }
 
 	    public abstract String getPageTitle();

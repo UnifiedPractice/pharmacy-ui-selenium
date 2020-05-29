@@ -23,11 +23,10 @@ public class SmokeTests extends BaseTest {
 	String CSR = getCredentials().get("CSR");
 	
 	@Test(enabled = true, priority = 1)
-	public void setCommission() throws InterruptedException {
+	public void setCommission(){
 		page.getInstance(LoginPage.class).login(practitioner.split(":")[0], practitioner.split(":")[1]);
 		page.getInstance(PractitionerHomePage.class).enter_CommissionsPage();
 		page.getInstance(CommissionsPage.class).set_Commission("5");
-		Thread.sleep(1500);
 		page.getInstance(CommissionsPage.class).assert_Commission(Variables.unEscapedHTML);
 	}
 

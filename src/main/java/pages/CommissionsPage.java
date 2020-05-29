@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -62,14 +63,9 @@ public class CommissionsPage extends BasePage {
 
 	// Methods
 	public void set_Commission(String commissionValue) {
-		try {
-			Thread.sleep(1500);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		getSetBulk().click();
 		getAllItems().sendKeys(commissionValue); // commission value to be added
-		getByCategories().click();
+		getAllItems().sendKeys(Keys.ENTER);
 		getApplyBulk().click();
 	}
 

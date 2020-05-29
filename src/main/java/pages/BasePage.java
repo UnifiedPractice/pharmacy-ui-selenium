@@ -49,7 +49,7 @@ public class BasePage extends Page {
 	@Override
 	public void waitForElement(By locator) {
 		try {
-			wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+			wait.until(ExpectedConditions.elementToBeClickable(locator));
 		} catch (Exception e) {
 			System.out.println("An error occurred upon waiting for element" + locator.toString());
 		}
