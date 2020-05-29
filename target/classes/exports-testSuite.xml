@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+
+<suite verbose="1" name="Default suite">
+	<listeners>
+		<listener class-name="ListenersPackage.TestsListener" />
+		<listener class-name="ListenersPackage.AnalyzerTransformer" />
+		<listener class-name="utilities.ExtentReporterNG" />
+	</listeners>
+
+
+	<!-- Chrome -->
+	<test name="ChromeExportTests">
+
+		<parameter name="browser" value="chrome" />
+		<parameter name="url" value="http://sunten.stage.helioscript.com" />
+
+		<classes>
+			<class name="tests.ChromeExports" />
+		</classes>
+	</test>
+
+
+	<!-- Firefox -->
+	<test name="FirefoxExportTests">
+
+		<parameter name="browser" value="firefox" />
+		<parameter name="url" value="http://sunten.stage.helioscript.com" />
+		
+		<classes>
+			<class name="tests.FirefoxExports" />
+		</classes>
+	</test>
+
+
+</suite>

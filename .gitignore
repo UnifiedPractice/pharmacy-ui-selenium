@@ -1,7 +1,3 @@
-.settings/
-.classpath
-.project
-.webtestit/
-reports/
-target/
-temp-reports/
+/target/
+/downloadFiles/
+/screenshots/

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+
+<suite verbose="1" name="Default suite">
+	<listeners>
+		<listener class-name="ListenersPackage.TestsListener" />
+		<listener class-name="ListenersPackage.TransformListener" />
+		<listener class-name="utilities.ExtentReporterNG" />
+	</listeners>
+
+	<!-- Chrome -->
+	<test name="Helioscript-SmokeTests(CHROME)">
+
+		<parameter name="browser" value="chrome" />
+		<parameter name="url" value="http://sunten.stage.helioscript.com" />
+
+		<classes>
+			<class name="tests.Imports" />
+		</classes>
+	</test>
+
+
+	<!-- Firefox -->
+	<test name="Helioscript-SmokeTests(FIREFOX)">
+
+		<parameter name="browser" value="firefox" />
+		<parameter name="url" value="http://sunten.stage.helioscript.com" />
+
+		<classes>
+			<class name="tests.Imports" />
+		</classes>
+	</test>
+
+
+</suite>
