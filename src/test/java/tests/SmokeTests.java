@@ -24,7 +24,6 @@ public class SmokeTests extends BaseTest {
 	
 	@Test(enabled = true, priority = 1)
 	public void setCommission() throws InterruptedException {
-		Thread.sleep(5000);
 		page.getInstance(LoginPage.class).login(practitioner.split(":")[0], practitioner.split(":")[1]);
 		page.getInstance(PractitionerHomePage.class).enter_CommissionsPage();
 		page.getInstance(CommissionsPage.class).set_Commission("5");
