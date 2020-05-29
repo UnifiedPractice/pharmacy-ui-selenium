@@ -1,0 +1,19 @@
+{
+  "endpoints": [
+    {
+      "active": true,
+      "capabilities": {
+        "chromeOptions": {
+          "prefs": {
+            "download.default_directory": "C:/Users/Andrew/Desktop"
+          }
+        }
+      },
+      "headless": false,
+      "id": "b49492f0-a093-2418-b703-fa9e1def8e7b",
+      "name": "New Endpoint",
+      "type": "local",
+      "browserName": "chrome"
+    }
+  ]
+}
