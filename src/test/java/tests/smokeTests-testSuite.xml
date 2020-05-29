@@ -20,7 +20,7 @@
 			<class name="tests.SmokeTests" />
 		</classes>
 	</test>
-
+	<!-- //test -->
 
 	<!-- Firefox -->
 	<!-- <test name="Helioscript-SmokeTests(FIREFOX)">
