@@ -14,7 +14,7 @@
 	<test name="Helioscript-SmokeTests(CHROME)">
 
 		<parameter name="browser" value="chrome" />
-		<parameter name="url" value="http://sunten.stage.helioscript.com" />
+		<parameter name="url" value="http://app.qa.helioscript.com/" />
 
 		<classes>
 			<class name="tests.SmokeTests" />
