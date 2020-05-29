@@ -60,11 +60,7 @@ public class LoginPage extends BasePage {
 	    
 	    //Methods - page navigation functions
 	    public PractitionerHomePage login(String username, String password) {
-	    	try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+
 	    	getUsername().sendKeys(username);
 	        getPassword().sendKeys(password);
 	        getLoginBtn().click();
@@ -72,21 +68,13 @@ public class LoginPage extends BasePage {
 	    }
 	    
 	    public RegistrationPage enter_Registration() {
-	    	try {
-				Thread.sleep(10000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+
 	    	getNewAccount().click();
 	    	return getInstance(RegistrationPage.class);
 	    }
 	    
 	    public void assert_wrongUser_errorMessage(String expected) {
-	    	try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+
 	    	Assert.assertEquals(getCredentialError().getText(), expected);
 	    }
     
