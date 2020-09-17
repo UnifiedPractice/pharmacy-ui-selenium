@@ -14,10 +14,10 @@
 	<test name="Helioscript-SmokeTests(CHROME)">
 
 		<parameter name="browser" value="chrome" />
-		<parameter name="url" value="http://app.qa.helioscript.com/" />
+		<parameter name="url" value="https://app.staging.helioscript.com/" />
 
 		<classes>
-			<class name="tests.SmokeTests" />
+			<class name="tests.Registration" />
 		</classes>
 	</test>
 

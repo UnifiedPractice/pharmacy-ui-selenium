@@ -25,7 +25,7 @@ public class Registration extends BaseTest {
 		page.getInstance(RegistrationPage.class).selectDropdowns();
 		page.getInstance(RegistrationPage.class).uploadLicense(Variables.uploadJS);
 		page.getInstance(RegistrationPage.class).submitApplication();
-		page.getInstance(RegistrationPage.class).assertRegistration(Variables.regApproval);
+		//page.getInstance(RegistrationPage.class).assertRegistration(Variables.regApproval);
 	}
 
 	@Test(enabled = true, priority = 2, dependsOnMethods = "practitionerRegistration") // 21 mm
@@ -43,8 +43,5 @@ public class Registration extends BaseTest {
 	public void change_practitionerPassword() {
 		page.getInstance(LoginPage.class).login(practitioner.split(":")[0], practitioner.split(":")[1]);
 		page.getInstance(PractitionerHomePage.class).enter_PractitionerProfilePage();
-		/*page.getInstance(PractitionerProfilePage.class).changePass_req(Variables.actualPass, Variables.newPass,
-				Variables.confirmPass);
-		page.getInstance(PractitionerProfilePage.class).changePassword();*/
 	}
 }
